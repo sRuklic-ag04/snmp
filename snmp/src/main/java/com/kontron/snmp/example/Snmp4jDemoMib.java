@@ -607,32 +607,47 @@ public class Snmp4jDemoMib
             return super.getValue();
         }
 
+        // todo set them to other value
         public int setValue(Integer32 newValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseTableType::setValue
-            char[][] pattern = SPARSE_PATTERNS[newValue.toInt()-1];
-            snmp4jDemoSparseEntryModel.clear();
-            Random random = new Random();
-            for (int r=1; r<101; r++) {
-                Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-                values[0] = new Integer32(1);
-                int colCount = snmp4jDemoSparseEntry.getColumnCount();
-                for (int i = 1; i < colCount; i++) {
-                    char c = 'x';
-                    switch (c) {
-                        case 'x':
-                            values[i] = new OctetString(""+r+":"+i);
-                            break;
-                        case 'r':
-                            if (random.nextBoolean()) {
-                                values[i] = new OctetString(""+r+":"+i);
-                            }
-                            break;
-                    }
-                }
-                Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { r }),
-                        values);
-                snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+//            char[][] pattern = SPARSE_PATTERNS[newValue.toInt()-1];
+//            snmp4jDemoSparseEntryModel.clear();
+//            Random random = new Random();
+//            for (int r=1; r<101; r++) { // what is this ffs
+//                Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
+//                values[0] = new Integer32(1);
+//                int colCount = snmp4jDemoSparseEntry.getColumnCount();
+//                for (int i = 1; i < colCount; i++) {
+//                    char c = 'x';
+//                    switch (c) {
+//                        case 'x':
+//                            values[i] = new OctetString(""+r+":"+i);
+//                            break;
+//                        case 'r':
+//                            if (random.nextBoolean()) {
+//                                values[i] = new OctetString(""+r+":"+i);
+//                            }
+//                            break;
+//                    }
+//                }
+//                Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { r }),
+//                        values);
+//                snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+//            }
+
+            // add one row with colum ids (increments)
+
+            Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
+            values[0] = new Integer32(1);
+            int colCount = snmp4jDemoSparseEntry.getColumnCount();
+            for (int i = 1; i < colCount; i++) {
+                values[i] = new OctetString(String.valueOf(i));
             }
+            Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
+
+            snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+
+
             //--AgentGen END
             return super.setValue(newValue);
         }
