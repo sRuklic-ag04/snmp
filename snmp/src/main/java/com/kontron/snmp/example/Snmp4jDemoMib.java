@@ -33,8 +33,6 @@ import org.snmp4j.log.LogFactory;
 import org.snmp4j.log.LogAdapter;
 import org.snmp4j.agent.mo.snmp.tc.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 

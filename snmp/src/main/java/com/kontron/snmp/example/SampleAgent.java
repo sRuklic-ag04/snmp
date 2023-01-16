@@ -42,7 +42,6 @@ import org.snmp4j.smi.*;
 import org.snmp4j.transport.*;
 import org.snmp4j.util.*;
 import org.snmp4j.security.SecurityProtocols;
-import org.snmp4j.agent.mo.snmp.TimeStamp;
 import org.springframework.util.ResourceUtils;
 
 import javax.crypto.Cipher;
@@ -302,10 +301,6 @@ public class SampleAgent {
     protected void registerMIBs() {
         if (modules == null) {
             modules = new Modules(getFactory());
-//            modules.getSnmp4jDemoMib().getSnmp4jDemoEntry().addMOTableRowListener(new DemoTableRowListener());
-//            ((TimeStamp) modules.getSnmp4jDemoMib().getSnmp4jDemoEntry().
-//                    getColumn(Snmp4jDemoMib.idxSnmp4jDemoEntryCol4)).
-//                    setSysUpTime(agent.getSysUpTime());
         }
         try {
             modules.registerMOs(server, null);
@@ -336,57 +331,6 @@ public class SampleAgent {
                     " MIB object registration may be incomplete!", drex);
         }
     }
-
-
-//    class DemoTableRowListener implements MOTableRowListener<Snmp4jDemoMib.Snmp4jDemoEntryRow> {
-//        public void rowChanged(MOTableRowEvent<Snmp4jDemoMib.Snmp4jDemoEntryRow> event) {
-//            if ((event.getType() == MOTableRowEvent.CREATE) ||
-//                    (event.getType() == MOTableRowEvent.UPDATED)) {
-//                // ignore
-//                return;
-//            }
-//            // update counter
-//            Counter32 counter = (Counter32)
-//                    event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoEntryCol3);
-//            if (counter == null) {
-//                counter = new Counter32(0);
-//                ((MOMutableTableRow)
-//                        event.getRow()).setValue(Snmp4jDemoMib.idxSnmp4jDemoEntryCol3,
-//                        counter);
-//            }
-//            counter.increment();
-//            // update timestamp
-//            TimeStamp timestamp = (TimeStamp)
-//                    event.getTable().getColumn(Snmp4jDemoMib.idxSnmp4jDemoEntryCol4);
-//            timestamp.update((MOMutableTableRow) event.getRow(),
-//                    Snmp4jDemoMib.idxSnmp4jDemoEntryCol4);
-//            // fire notification
-//            Integer32 type =
-//                    new Integer32(Snmp4jDemoMib.Snmp4jDemoTableRowModificationEnum.updated);
-//            switch (event.getType()) {
-//                case MOTableRowEvent.ADD:
-//                    type.setValue(Snmp4jDemoMib.Snmp4jDemoTableRowModificationEnum.created);
-//                    break;
-//                case MOTableRowEvent.DELETE:
-//                    type.setValue(Snmp4jDemoMib.Snmp4jDemoTableRowModificationEnum.deleted);
-//                    break;
-//            }
-//            VariableBinding[] payload = new VariableBinding[2];
-//            OID table = event.getTable().getOID();
-//            OID updateCount = new OID(table);
-//            updateCount.append(Snmp4jDemoMib.colSnmp4jDemoEntryCol3);
-//            updateCount.append(event.getRow().getIndex());
-//
-//            OID modifyType = new OID(table);
-//            modifyType.append(Snmp4jDemoMib.colSnmp4jDemoTableRowModification);
-//            modifyType.append(event.getRow().getIndex());
-//
-//            payload[0] = new VariableBinding(updateCount, counter);
-//            payload[1] = new VariableBinding(modifyType, type);
-//            modules.getSnmp4jDemoMib().snmp4jDemoEvent(
-//                    agent.getNotificationOriginator(), new OctetString(), payload);
-//        }
-//    }
 
     protected static List<String[]> splitArgsForMultipleAgents(String[] args, String separatorArgs) {
         List<String[]> agentsCommandLines = new ArrayList<>();
