@@ -22,13 +22,12 @@ package com.kontron.snmp.example;
 //--AgentGen BEGIN=_BEGIN
 //--AgentGen END
 
+import org.snmp4j.agent.mo.snmp.RowStatus;
 import org.snmp4j.smi.*;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.agent.*;
 import org.snmp4j.agent.mo.*;
-import org.snmp4j.agent.mo.snmp.*;
 import org.snmp4j.agent.mo.snmp.smi.*;
-import org.snmp4j.agent.request.*;
 import org.snmp4j.log.LogFactory;
 import org.snmp4j.log.LogAdapter;
 import org.snmp4j.agent.mo.snmp.tc.*;
@@ -68,6 +67,15 @@ public class Snmp4jDemoMib
     // Tables
 
     // Enumerations
+    public static final class FmSeverity {
+        public static final int indeterminate = 1;
+        public static final int cleared = 2;
+        public static final int normal = 3;
+        public static final int warning = 4;
+        public static final int minor = 5;
+        public static final int major = 6;
+        public static final int critical = 7;
+    }
 
     // TextualConventions
     private static final String TC_MODULE_SNMPV2_TC = "SNMPv2-TC";
@@ -205,19 +213,8 @@ public class Snmp4jDemoMib
 
         // Columns
         MOColumn<?>[] snmp4jDemoSparseEntryColumns = new MOColumn<?>[10];
-//        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus] =
-//                new RowStatus<Snmp4jDemoSparseEntryRow>(colSnmp4jDemoSparseTableRowStatus);
-//        ValueConstraint snmp4jDemoSparseTableRowStatusVC = new EnumerationConstraint(
-//                new int[] { 1,
-//                        2,
-//                        3,
-//                        4,
-//                        5,
-//                        6 });
-//        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
-//                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableRowStatusVC));
-//        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
-//                addMOValueValidationListener(new Snmp4jDemoSparseTableRowStatusValidator());
+
+        // col1
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol1,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -229,6 +226,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol1VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol1Validator());
+
+        // col2
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol2] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol2,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -240,6 +239,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol2VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol2]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol2Validator());
+
+        // col3
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol3] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol3,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -251,17 +252,27 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol3VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol3]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol3Validator());
+
+        // col4
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol4,
-                        SMIConstants.SYNTAX_OCTET_STRING,
-                        moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
-                        (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol4VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol4VC).add(new Constraint(0L, 10L));
+                new RowStatus<Snmp4jDemoSparseEntryRow>(colSnmp4jDemoSparseTableCol4);
+        ValueConstraint snmp4jDemoSparseTableCol4VC = new EnumerationConstraint(
+                new int[] {
+                        FmSeverity.indeterminate,
+                        FmSeverity.cleared,
+                        FmSeverity.normal,
+                        FmSeverity.warning,
+                        FmSeverity.minor,
+                        FmSeverity.major,
+                        FmSeverity.critical
+                }
+        );
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4]).
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol4VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol4Validator());
+
+        // col5
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol5] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol5,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -273,6 +284,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol5VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol5]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol5Validator());
+
+        // col6
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol6] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol6,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -284,6 +297,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol6VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol6]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol6Validator());
+
+        // col7
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol7,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -295,6 +310,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol7VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol7Validator());
+
+        // col8
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol8,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -306,6 +323,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol8VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol8Validator());
+
+        // col9
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol9,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -317,6 +336,8 @@ public class Snmp4jDemoMib
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol9VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol9Validator());
+
+        // col10
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol10] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol10,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -364,10 +385,14 @@ public class Snmp4jDemoMib
         snmp4jDemoSparseEntryModel.clear();
 
         Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-        values[0] = new Integer32(1);
+//        values[0] = new Integer32(1);
         int colCount = snmp4jDemoSparseEntry.getColumnCount();
-        for (int i = 1; i < colCount; i++) {
-            values[i] = new OctetString(String.valueOf(i) + "-20309");
+        for (int i = 0; i < colCount; i++) {
+            if (i == 3) {
+                values[i] = new Integer32(FmSeverity.minor);
+            } else {
+                values[i] = new OctetString(String.valueOf(i) + "-20309");
+            }
         }
         Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
 
@@ -594,13 +619,13 @@ public class Snmp4jDemoMib
             super.setValue(idxSnmp4jDemoSparseTableCol3, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol4() {
+        public Integer32 getSnmp4jDemoSparseTableCol4() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol4
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol4);
+            return (Integer32) super.getValue(idxSnmp4jDemoSparseTableCol4);
         }
 
-        public void setSnmp4jDemoSparseTableCol4(OctetString newColValue) {
+        public void setSnmp4jDemoSparseTableCol4(Integer32 newColValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol4
             //--AgentGen END
             super.setValue(idxSnmp4jDemoSparseTableCol4, newColValue);
@@ -721,7 +746,7 @@ public class Snmp4jDemoMib
                     setSnmp4jDemoSparseTableCol3((OctetString)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol4:
-                    setSnmp4jDemoSparseTableCol4((OctetString)value);
+                    setSnmp4jDemoSparseTableCol4((Integer32)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol5:
                     setSnmp4jDemoSparseTableCol5((OctetString)value);
