@@ -33,9 +33,6 @@ import org.snmp4j.log.LogFactory;
 import org.snmp4j.log.LogAdapter;
 import org.snmp4j.agent.mo.snmp.tc.*;
 
-import java.util.Random;
-
-
 //--AgentGen BEGIN=_IMPORT
 //--AgentGen END
 
@@ -47,145 +44,10 @@ public class Snmp4jDemoMib
 //--AgentGen END
 {
 
-    private static final LogAdapter LOGGER =
-            LogFactory.getLogger(Snmp4jDemoMib.class);
+    private static final LogAdapter LOGGER = LogFactory.getLogger(Snmp4jDemoMib.class);
 
     //--AgentGen BEGIN=_STATIC
-    private static final char[][][] SPARSE_PATTERNS = {
-            {
-                    { 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' },
-                    { ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ' },
-                    { ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ' },
-                    { ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ' },
-                    { ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ' },
-                    { ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ' },
-                    { 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' }
-            },
-            {
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' }
-            },
-            {
-                    { 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' }
-            },
-            {
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                    { 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
-            },
-            {
-                    { 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', ' ', 'x', 'x', ' ', ' ', 'x' },
-                    { 'x', ' ', ' ', 'x', ' ', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' ', 'x', ' ', ' ', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', 'x', ' ', 'x', 'x', ' ', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', 'x', ' ', ' ', 'x', 'x', 'x', ' ', 'x', ' ' },
-                    { 'x', ' ', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', ' ', 'x', ' ', ' ' },
-                    { ' ', ' ', 'x', ' ', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' ', 'x', 'x', 'x', ' ', 'x', ' ', ' ', 'x' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', ' ', ' ', 'x', 'x' },
-                    { ' ', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x', 'x', ' ', 'x', 'x', ' ', 'x', 'x', ' ', 'x', 'x', 'x' },
-                    { ' ', 'x', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', 'x', ' ', 'x', 'x', ' ', 'x', 'x', 'x', ' ' },
-                    { 'x', ' ', ' ', 'x', 'x', ' ', ' ', 'x', ' ', 'x', 'x', ' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', 'x' },
-                    { 'x', 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x' },
-                    { ' ', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', 'x', ' ', 'x', 'x' },
-                    { ' ', 'x', 'x', ' ', ' ', 'x', 'x', ' ', 'x', ' ', ' ', 'x', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', ' ', ' ' },
-                    { 'x', ' ', ' ', 'x', 'x', ' ', ' ', 'x', ' ', 'x', 'x', ' ', ' ', 'x', 'x', 'x', 'x', ' ', 'x', ' ' },
-                    { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ' ', ' ', 'x', 'x' },
-                    { 'x', 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', 'x', 'x', ' ', ' ', ' ', 'x', 'x', ' ', 'x' },
-                    { ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', ' ', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-                    { 'x', ' ', 'x', 'x', 'x', ' ', 'x', 'x', 'x', 'x', 'x', ' ', 'x', 'x', 'x', ' ', 'x', ' ', 'x', ' ' }
-            },
-            {
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' },
-                    { 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r' }
-            }
-    };
-//--AgentGen END
+    //--AgentGen END
 
     // Factory
     private MOFactory moFactory =
@@ -198,25 +60,14 @@ public class Snmp4jDemoMib
      * used for its identification.
      */
     public static final OID oidSnmp4jDemoMib =
-            new OID(new int[] { 1,3,6,1,4,1,20306,10,1,1,20 });
+            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20 });
 
     // Identities
     // Scalars
-    public static final OID oidSnmp4jDemoScalar =
-            new OID(new int[] { 1,3,6,1,4,1,20306,10,1,1,20,1,1,0 });
-    public static final OID oidSnmp4jDemoSparseTableType =
-            new OID(new int[] { 1,3,6,1,4,1,20306,10,1,1,20,1,3,0 });
+
     // Tables
 
     // Enumerations
-    public static final class Snmp4jDemoSparseTableTypeEnum {
-        public static final int cross = 1;
-        public static final int square = 2;
-        public static final int stairsDown = 3;
-        public static final int stairsUp = 4;
-        public static final int rain = 5;
-        public static final int random = 6;
-    }
 
     // TextualConventions
     private static final String TC_MODULE_SNMPV2_TC = "SNMPv2-TC";
@@ -228,8 +79,6 @@ public class Snmp4jDemoMib
     private static final String TC_TIMESTAMP = "TimeStamp";
 
     // Scalars
-    private MOScalar<OctetString> snmp4jDemoScalar;
-    private MOScalar<Integer32> snmp4jDemoSparseTableType;
 
     // Column TC definitions for snmp4jDemoEntry:
     public static final String tcModuleSNMPv2Tc = "SNMPv2-TC";
@@ -238,11 +87,11 @@ public class Snmp4jDemoMib
     public static final String tcDefRowStatus = "RowStatus";
 
     public static final OID oidSnmp4jDemoSparseEntry =
-            new OID(new int[] { 1,3,6,1,4,1,20306,10,1,1,20,1,4,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20,1,4,1 });
 
     // Index OID definitions
     public static final OID oidSnmp4jDemoSparseTableIndex =
-            new OID(new int[] { 1,3,6,1,4,1,20306,10,1,1,20,1,4,1,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20,1,4,1,1 });
 
     // Column TC definitions for snmp4jDemoSparseEntry:
     public static final String tcModuleSnmp4jDemoMib = "SNMP4J-DEMO-MIB";
@@ -311,7 +160,8 @@ public class Snmp4jDemoMib
         this();
         createMO(moFactory);
 //--AgentGen BEGIN=_FACTORYCONSTRUCTOR
-        snmp4jDemoSparseTableType.setValue(new Integer32(Snmp4jDemoSparseTableTypeEnum.random));
+//        snmp4jDemoSparseTableType.setValue(new Integer32(Snmp4jDemoSparseTableTypeEnum.random));
+        setValue();
 //--AgentGen END
     }
 
@@ -327,23 +177,7 @@ public class Snmp4jDemoMib
      */
     protected void createMO(MOFactory moFactory) {
         addTCsToFactory(moFactory);
-        snmp4jDemoScalar =
-                new Snmp4jDemoScalar(oidSnmp4jDemoScalar,
-                        moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_WRITE));
-        snmp4jDemoScalar.addMOValueValidationListener(new Snmp4jDemoScalarValidator());
-        snmp4jDemoSparseTableType =
-                new Snmp4jDemoSparseTableType(oidSnmp4jDemoSparseTableType,
-                        moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_WRITE));
-        snmp4jDemoSparseTableType.addMOValueValidationListener(new Snmp4jDemoSparseTableTypeValidator());
-//        createSnmp4jDemoEntry(moFactory);
         createSnmp4jDemoSparseEntry(moFactory);
-    }
-
-    public MOScalar<OctetString> getSnmp4jDemoScalar() {
-        return snmp4jDemoScalar;
-    }
-    public MOScalar<Integer32> getSnmp4jDemoSparseTableType() {
-        return snmp4jDemoSparseTableType;
     }
 
     @SuppressWarnings("rawtypes")
@@ -517,8 +351,6 @@ public class Snmp4jDemoMib
             throws DuplicateRegistrationException
     {
         // Scalar Objects
-        server.register(this.snmp4jDemoScalar, context);
-        server.register(this.snmp4jDemoSparseTableType, context);
         server.register(this.snmp4jDemoSparseEntry, context);
 //--AgentGen BEGIN=_registerMOs
 //--AgentGen END
@@ -526,8 +358,6 @@ public class Snmp4jDemoMib
 
     public void unregisterMOs(MOServer server, OctetString context) {
         // Scalar Objects
-        server.unregister(this.snmp4jDemoScalar, context);
-        server.unregister(this.snmp4jDemoSparseTableType, context);
         server.unregister(this.snmp4jDemoSparseEntry, context);
 //--AgentGen BEGIN=_unregisterMOs
 //--AgentGen END
@@ -576,117 +406,22 @@ public class Snmp4jDemoMib
 
     }
 
-    public class Snmp4jDemoSparseTableType extends EnumeratedScalar<Integer32> {
-        Snmp4jDemoSparseTableType(OID oid, MOAccess access) {
-            super(oid, access, new Integer32(),
-                    new int[] { Snmp4jDemoSparseTableTypeEnum.cross,
-                            Snmp4jDemoSparseTableTypeEnum.square,
-                            Snmp4jDemoSparseTableTypeEnum.stairsDown,
-                            Snmp4jDemoSparseTableTypeEnum.stairsUp,
-                            Snmp4jDemoSparseTableTypeEnum.rain,
-                            Snmp4jDemoSparseTableTypeEnum.random });
-//--AgentGen BEGIN=snmp4jDemoSparseTableType
-//--AgentGen END
+    public void setValue() {
+        snmp4jDemoSparseEntryModel.clear();
+
+        Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
+        values[0] = new Integer32(1);
+        int colCount = snmp4jDemoSparseEntry.getColumnCount();
+        for (int i = 1; i < colCount; i++) {
+            values[i] = new OctetString(String.valueOf(i));
         }
+        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
 
-        public int isValueOK(SubRequest<?> request) {
-            Variable newValue =
-                    request.getVariableBinding().getVariable();
-            int valueOK = super.isValueOK(request);
-            if (valueOK != SnmpConstants.SNMP_ERROR_SUCCESS) {
-                return valueOK;
-            }
-            //--AgentGen BEGIN=snmp4jDemoSparseTableType::isValueOK
-            //--AgentGen END
-            return valueOK;
-        }
-
-        public Integer32 getValue() {
-            //--AgentGen BEGIN=snmp4jDemoSparseTableType::getValue
-            //--AgentGen END
-            return super.getValue();
-        }
-
-        // todo set them to other value
-        public int setValue(Integer32 newValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseTableType::setValue
-//            char[][] pattern = SPARSE_PATTERNS[newValue.toInt()-1];
-//            snmp4jDemoSparseEntryModel.clear();
-//            Random random = new Random();
-//            for (int r=1; r<101; r++) { // what is this ffs
-//                Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-//                values[0] = new Integer32(1);
-//                int colCount = snmp4jDemoSparseEntry.getColumnCount();
-//                for (int i = 1; i < colCount; i++) {
-//                    char c = 'x';
-//                    switch (c) {
-//                        case 'x':
-//                            values[i] = new OctetString(""+r+":"+i);
-//                            break;
-//                        case 'r':
-//                            if (random.nextBoolean()) {
-//                                values[i] = new OctetString(""+r+":"+i);
-//                            }
-//                            break;
-//                    }
-//                }
-//                Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { r }),
-//                        values);
-//                snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
-//            }
-
-            // add one row with colum ids (increments)
-
-            Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-            values[0] = new Integer32(1);
-            int colCount = snmp4jDemoSparseEntry.getColumnCount();
-            for (int i = 1; i < colCount; i++) {
-                values[i] = new OctetString(String.valueOf(i));
-            }
-            Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
-
-            snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
-
-
-            //--AgentGen END
-            return super.setValue(newValue);
-        }
-
-        //--AgentGen BEGIN=snmp4jDemoSparseTableType::_METHODS
-        //--AgentGen END
-
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
     }
+
 
     // Value Validators
-    /**
-     * The {@code Snmp4jDemoScalarValidator} implements the value
-     * validation for {@code Snmp4jDemoScalar}.
-     */
-    static class Snmp4jDemoScalarValidator implements MOValueValidationListener {
-
-        public void validate(MOValueValidationEvent validationEvent) {
-            Variable newValue = validationEvent.getNewValue();
-            OctetString os = (OctetString)newValue;
-            if (!(((os.length() >= 0) && (os.length() <= 255)))) {
-                validationEvent.setValidationStatus(SnmpConstants.SNMP_ERROR_WRONG_LENGTH);
-                return;
-            }
-            //--AgentGen BEGIN=snmp4jDemoScalar::validate
-            //--AgentGen END
-        }
-    }
-    /**
-     * The {@code Snmp4jDemoSparseTableTypeValidator} implements the value
-     * validation for {@code Snmp4jDemoSparseTableType}.
-     */
-    static class Snmp4jDemoSparseTableTypeValidator implements MOValueValidationListener {
-
-        public void validate(MOValueValidationEvent validationEvent) {
-            Variable newValue = validationEvent.getNewValue();
-            //--AgentGen BEGIN=snmp4jDemoSparseTableType::validate
-            //--AgentGen END
-        }
-    }
 
     /**
      * The {@code Snmp4jDemoSparseTableRowStatusValidator} implements the value
