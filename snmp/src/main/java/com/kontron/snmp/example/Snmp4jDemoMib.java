@@ -60,7 +60,7 @@ public class Snmp4jDemoMib
      * used for its identification.
      */
     public static final OID oidSnmp4jDemoMib =
-            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20 });
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20 });
 
     // Identities
     // Scalars
@@ -87,41 +87,39 @@ public class Snmp4jDemoMib
     public static final String tcDefRowStatus = "RowStatus";
 
     public static final OID oidSnmp4jDemoSparseEntry =
-            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20,1,4,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1 });
 
     // Index OID definitions
     public static final OID oidSnmp4jDemoSparseTableIndex =
-            new OID(new int[] { 1,3,6,1,4,1,20308,10,1,1,20,1,4,1,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,1 });
 
     // Column TC definitions for snmp4jDemoSparseEntry:
     public static final String tcModuleSnmp4jDemoMib = "SNMP4J-DEMO-MIB";
     public static final String tcDefSparseTableColumn = "SparseTableColumn";
 
     // Column sub-identifier definitions for snmp4jDemoSparseEntry:
-    public static final int colSnmp4jDemoSparseTableRowStatus = 2;
-    public static final int colSnmp4jDemoSparseTableCol1 = 3;
-    public static final int colSnmp4jDemoSparseTableCol2 = 4;
-    public static final int colSnmp4jDemoSparseTableCol3 = 5;
-    public static final int colSnmp4jDemoSparseTableCol4 = 6;
-    public static final int colSnmp4jDemoSparseTableCol5 = 7;
-    public static final int colSnmp4jDemoSparseTableCol6 = 8;
-    public static final int colSnmp4jDemoSparseTableCol7 = 9;
-    public static final int colSnmp4jDemoSparseTableCol8 = 10;
-    public static final int colSnmp4jDemoSparseTableCol9 = 11;
-    public static final int colSnmp4jDemoSparseTableCol10 = 12;
+    public static final int colSnmp4jDemoSparseTableCol1 = 2;
+    public static final int colSnmp4jDemoSparseTableCol2 = 3;
+    public static final int colSnmp4jDemoSparseTableCol3 = 4;
+    public static final int colSnmp4jDemoSparseTableCol4 = 5;
+    public static final int colSnmp4jDemoSparseTableCol5 = 6;
+    public static final int colSnmp4jDemoSparseTableCol6 = 7;
+    public static final int colSnmp4jDemoSparseTableCol7 = 8;
+    public static final int colSnmp4jDemoSparseTableCol8 = 9;
+    public static final int colSnmp4jDemoSparseTableCol9 = 10;
+    public static final int colSnmp4jDemoSparseTableCol10 = 11;
 
     // Column index definitions for snmp4jDemoSparseEntry:
-    public static final int idxSnmp4jDemoSparseTableRowStatus = 0;
-    public static final int idxSnmp4jDemoSparseTableCol1 = 1;
-    public static final int idxSnmp4jDemoSparseTableCol2 = 2;
-    public static final int idxSnmp4jDemoSparseTableCol3 = 3;
-    public static final int idxSnmp4jDemoSparseTableCol4 = 4;
-    public static final int idxSnmp4jDemoSparseTableCol5 = 5;
-    public static final int idxSnmp4jDemoSparseTableCol6 = 6;
-    public static final int idxSnmp4jDemoSparseTableCol7 = 7;
-    public static final int idxSnmp4jDemoSparseTableCol8 = 8;
-    public static final int idxSnmp4jDemoSparseTableCol9 = 9;
-    public static final int idxSnmp4jDemoSparseTableCol10 = 10;
+    public static final int idxSnmp4jDemoSparseTableCol1 = 0;
+    public static final int idxSnmp4jDemoSparseTableCol2 = 1;
+    public static final int idxSnmp4jDemoSparseTableCol3 = 2;
+    public static final int idxSnmp4jDemoSparseTableCol4 = 3;
+    public static final int idxSnmp4jDemoSparseTableCol5 = 4;
+    public static final int idxSnmp4jDemoSparseTableCol6 = 5;
+    public static final int idxSnmp4jDemoSparseTableCol7 = 6;
+    public static final int idxSnmp4jDemoSparseTableCol8 = 7;
+    public static final int idxSnmp4jDemoSparseTableCol9 = 8;
+    public static final int idxSnmp4jDemoSparseTableCol10 = 9;
 
     private MOTableSubIndex[] snmp4jDemoSparseEntryIndexes;
     private MOTableIndex snmp4jDemoSparseEntryIndex;
@@ -160,7 +158,6 @@ public class Snmp4jDemoMib
         this();
         createMO(moFactory);
 //--AgentGen BEGIN=_FACTORYCONSTRUCTOR
-//        snmp4jDemoSparseTableType.setValue(new Integer32(Snmp4jDemoSparseTableTypeEnum.random));
         setValue();
 //--AgentGen END
     }
@@ -207,20 +204,20 @@ public class Snmp4jDemoMib
                         });
 
         // Columns
-        MOColumn<?>[] snmp4jDemoSparseEntryColumns = new MOColumn<?>[11];
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus] =
-                new RowStatus<Snmp4jDemoSparseEntryRow>(colSnmp4jDemoSparseTableRowStatus);
-        ValueConstraint snmp4jDemoSparseTableRowStatusVC = new EnumerationConstraint(
-                new int[] { 1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6 });
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableRowStatusVC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableRowStatusValidator());
+        MOColumn<?>[] snmp4jDemoSparseEntryColumns = new MOColumn<?>[10];
+//        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus] =
+//                new RowStatus<Snmp4jDemoSparseEntryRow>(colSnmp4jDemoSparseTableRowStatus);
+//        ValueConstraint snmp4jDemoSparseTableRowStatusVC = new EnumerationConstraint(
+//                new int[] { 1,
+//                        2,
+//                        3,
+//                        4,
+//                        5,
+//                        6 });
+//        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
+//                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableRowStatusVC));
+//        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableRowStatus]).
+//                addMOValueValidationListener(new Snmp4jDemoSparseTableRowStatusValidator());
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1] =
                 new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol1,
                         SMIConstants.SYNTAX_OCTET_STRING,
@@ -363,49 +360,6 @@ public class Snmp4jDemoMib
 //--AgentGen END
     }
 
-    // Scalars
-    public class Snmp4jDemoScalar extends DisplayStringScalar<OctetString> {
-        Snmp4jDemoScalar(OID oid, MOAccess access) {
-            super(oid, access, new OctetString(),
-                    0,
-                    255);
-//--AgentGen BEGIN=snmp4jDemoScalar
-//--AgentGen END
-        }
-
-        public int isValueOK(SubRequest<?> request) {
-            Variable newValue =
-                    request.getVariableBinding().getVariable();
-            int valueOK = super.isValueOK(request);
-            if (valueOK != SnmpConstants.SNMP_ERROR_SUCCESS) {
-                return valueOK;
-            }
-            OctetString os = (OctetString)newValue;
-            if (!(((os.length() >= 0) && (os.length() <= 255)))) {
-                valueOK = SnmpConstants.SNMP_ERROR_WRONG_LENGTH;
-            }
-            //--AgentGen BEGIN=snmp4jDemoScalar::isValueOK
-            //--AgentGen END
-            return valueOK;
-        }
-
-        public OctetString getValue() {
-            //--AgentGen BEGIN=snmp4jDemoScalar::getValue
-            //--AgentGen END
-            return super.getValue();
-        }
-
-        public int setValue(OctetString newValue) {
-            //--AgentGen BEGIN=snmp4jDemoScalar::setValue
-            //--AgentGen END
-            return super.setValue(newValue);
-        }
-
-        //--AgentGen BEGIN=snmp4jDemoScalar::_METHODS
-        //--AgentGen END
-
-    }
-
     public void setValue() {
         snmp4jDemoSparseEntryModel.clear();
 
@@ -413,7 +367,7 @@ public class Snmp4jDemoMib
         values[0] = new Integer32(1);
         int colCount = snmp4jDemoSparseEntry.getColumnCount();
         for (int i = 1; i < colCount; i++) {
-            values[i] = new OctetString(String.valueOf(i));
+            values[i] = new OctetString(String.valueOf(i) + "-20309");
         }
         Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
 
@@ -422,19 +376,6 @@ public class Snmp4jDemoMib
 
 
     // Value Validators
-
-    /**
-     * The {@code Snmp4jDemoSparseTableRowStatusValidator} implements the value
-     * validation for {@code Snmp4jDemoSparseTableRowStatus}.
-     */
-    static class Snmp4jDemoSparseTableRowStatusValidator implements MOValueValidationListener {
-
-        public void validate(MOValueValidationEvent validationEvent) {
-            Variable newValue = validationEvent.getNewValue();
-            //--AgentGen BEGIN=snmp4jDemoSparseTableRowStatus::validate
-            //--AgentGen END
-        }
-    }
     /**
      * The {@code Snmp4jDemoSparseTableCol1Validator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol1}.
@@ -617,18 +558,6 @@ public class Snmp4jDemoMib
             //--AgentGen END
         }
 
-        public Integer32 getSnmp4jDemoSparseTableRowStatus() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableRowStatus
-            //--AgentGen END
-            return (Integer32) super.getValue(idxSnmp4jDemoSparseTableRowStatus);
-        }
-
-        public void setSnmp4jDemoSparseTableRowStatus(Integer32 newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableRowStatus
-            //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableRowStatus, newColValue);
-        }
-
         public OctetString getSnmp4jDemoSparseTableCol1() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol1
             //--AgentGen END
@@ -753,8 +682,6 @@ public class Snmp4jDemoMib
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowGetValue
             //--AgentGen END
             switch(column) {
-                case idxSnmp4jDemoSparseTableRowStatus:
-                    return getSnmp4jDemoSparseTableRowStatus();
                 case idxSnmp4jDemoSparseTableCol1:
                     return getSnmp4jDemoSparseTableCol1();
                 case idxSnmp4jDemoSparseTableCol2:
@@ -784,9 +711,6 @@ public class Snmp4jDemoMib
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowSetValue
             //--AgentGen END
             switch(column) {
-                case idxSnmp4jDemoSparseTableRowStatus:
-                    setSnmp4jDemoSparseTableRowStatus((Integer32)value);
-                    break;
                 case idxSnmp4jDemoSparseTableCol1:
                     setSnmp4jDemoSparseTableCol1((OctetString)value);
                     break;
