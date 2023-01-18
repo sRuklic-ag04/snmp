@@ -111,6 +111,8 @@ public class Snmp4jDemoMib
     private static final String TC_DISPLAYSTRING = "DisplayString";
     private static final String TC_ROWSTATUS = "RowStatus";
     private static final String TC_TIMESTAMP = "TimeStamp";
+    private static final String TC_IANAITUPROBABLECAUSE = "IANAItuProbableCause";
+    private static final String TC_IANAITUEVENTTYPE = "IANAItuEventType";
 
     // Scalars
 
@@ -240,12 +242,12 @@ public class Snmp4jDemoMib
         // Columns
         MOColumn<?>[] snmp4jDemoSparseEntryColumns = new MOColumn<?>[10];
 
-        // col1
+        // col1 UnsignedInteger32
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol1,
-                        SMIConstants.SYNTAX_OCTET_STRING,
+                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol1,
+                        SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
-                        (OctetString)null);
+                        (UnsignedInteger32)null);
         ValueConstraint snmp4jDemoSparseTableCol1VC = new ConstraintsImpl();
         ((ConstraintsImpl)snmp4jDemoSparseTableCol1VC).add(new Constraint(0L, 10L));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1]).
@@ -281,7 +283,10 @@ public class Snmp4jDemoMib
 
         // col4
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4] =
-                new RowStatus<Snmp4jDemoSparseEntryRow>(colSnmp4jDemoSparseTableCol4);
+                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol4,
+                        SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
+                        moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
+                        (UnsignedInteger32)null);
         ValueConstraint snmp4jDemoSparseTableCol4VC = new EnumerationConstraint(
                 new int[] {
                         FmSeverity.indeterminate,
@@ -337,27 +342,232 @@ public class Snmp4jDemoMib
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol7Validator());
 
-        // col8
+        // col8 IANAItuEventType
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol8,
+                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol8,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
-                        (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol8VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol8VC).add(new Constraint(0L, 10L));
+                        (UnsignedInteger32)null);
+        ValueConstraint snmp4jDemoSparseTableCol8VC = new EnumerationConstraint(
+                new int[] {
+                        IANAItuEventType.other,
+                        IANAItuEventType.communicationsAlarm,
+                        IANAItuEventType.qualityOfServiceAlarm,
+                        IANAItuEventType.processingErrorAlarm,
+                        IANAItuEventType.equipmentAlarm,
+                        IANAItuEventType.environmentalAlarm,
+                        IANAItuEventType.integrityViolation,
+                        IANAItuEventType.operationalViolation,
+                        IANAItuEventType.physicalViolation,
+                        IANAItuEventType.securityServiceOrMechanismViolation,
+                        IANAItuEventType.timeDomainViolation
+                }
+        );
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8]).
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol8VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8]).
                 addMOValueValidationListener(new Snmp4jDemoSparseTableCol8Validator());
 
-        // col9
+        // col9 IANAItuProbableCause
         snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol9,
-                        SMIConstants.SYNTAX_OCTET_STRING,
+                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol9,
+                        SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
-                        (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol9VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol9VC).add(new Constraint(0L, 10L));
+                        (UnsignedInteger32)null);
+        ValueConstraint snmp4jDemoSparseTableCol9VC = new EnumerationConstraint(
+                new int[] {
+                        IANAItuProbableCause.aIS,
+                        IANAItuProbableCause.callSetUpFailure,
+                        IANAItuProbableCause.degradedSignal,
+                        IANAItuProbableCause.farEndReceiverFailure,
+                        IANAItuProbableCause.framingError,
+                        IANAItuProbableCause.lossOfFrame,
+                        IANAItuProbableCause.lossOfPointer,
+                        IANAItuProbableCause.lossOfSignal,
+                        IANAItuProbableCause.payloadTypeMismatch,
+                        IANAItuProbableCause.transmissionError,
+                        IANAItuProbableCause.remoteAlarmInterface,
+                        IANAItuProbableCause.excessiveBER,
+                        IANAItuProbableCause.pathTraceMismatch,
+                        IANAItuProbableCause.unavailable,
+                        IANAItuProbableCause.signalLabelMismatch,
+                        IANAItuProbableCause.lossOfMultiFrame,
+                        IANAItuProbableCause.receiveFailure,
+                        IANAItuProbableCause.transmitFailure,
+                        IANAItuProbableCause.modulationFailure,
+                        IANAItuProbableCause.demodulationFailure,
+                        IANAItuProbableCause.broadcastChannelFailure,
+                        IANAItuProbableCause.connectionEstablishmentError,
+                        IANAItuProbableCause.invalidMessageReceived,
+                        IANAItuProbableCause.localNodeTransmissionError,
+                        IANAItuProbableCause.remoteNodeTransmissionError,
+                        IANAItuProbableCause.routingFailure,
+                        IANAItuProbableCause.backplaneFailure,
+                        IANAItuProbableCause.dataSetProblem,
+                        IANAItuProbableCause.equipmentIdentifierDuplication,
+                        IANAItuProbableCause.externalIFDeviceProblem,
+                        IANAItuProbableCause.lineCardProblem,
+                        IANAItuProbableCause.multiplexerProblem,
+                        IANAItuProbableCause.nEIdentifierDuplication,
+                        IANAItuProbableCause.powerProblem,
+                        IANAItuProbableCause.processorProblem,
+                        IANAItuProbableCause.protectionPathFailure,
+                        IANAItuProbableCause.receiverFailure,
+                        IANAItuProbableCause.replaceableUnitMissing,
+                        IANAItuProbableCause.replaceableUnitTypeMismatch,
+                        IANAItuProbableCause.synchronizationSourceMismatch,
+                        IANAItuProbableCause.terminalProblem,
+                        IANAItuProbableCause.timingProblem,
+                        IANAItuProbableCause.transmitterFailure,
+                        IANAItuProbableCause.trunkCardProblem,
+                        IANAItuProbableCause.replaceableUnitProblem,
+                        IANAItuProbableCause.realTimeClockFailure,
+                        IANAItuProbableCause.antennaFailure,
+                        IANAItuProbableCause.batteryChargingFailure,
+                        IANAItuProbableCause.diskFailure,
+                        IANAItuProbableCause.frequencyHoppingFailure,
+                        IANAItuProbableCause.iODeviceError,
+                        IANAItuProbableCause.lossOfSynchronisation,
+                        IANAItuProbableCause.lossOfRedundancy,
+                        IANAItuProbableCause.powerSupplyFailure,
+                        IANAItuProbableCause.signalQualityEvaluationFailure,
+                        IANAItuProbableCause.tranceiverFailure,
+                        IANAItuProbableCause.protectionMechanismFailure,
+                        IANAItuProbableCause.protectingResourceFailure,
+                        IANAItuProbableCause.airCompressorFailure,
+                        IANAItuProbableCause.airConditioningFailure,
+                        IANAItuProbableCause.airDryerFailure,
+                        IANAItuProbableCause.batteryDischarging,
+                        IANAItuProbableCause.batteryFailure,
+                        IANAItuProbableCause.commercialPowerFailure,
+                        IANAItuProbableCause.coolingFanFailure,
+                        IANAItuProbableCause.engineFailure,
+                        IANAItuProbableCause.fireDetectorFailure,
+                        IANAItuProbableCause.fuseFailure,
+                        IANAItuProbableCause.generatorFailure,
+                        IANAItuProbableCause.lowBatteryThreshold,
+                        IANAItuProbableCause.pumpFailure,
+                        IANAItuProbableCause.rectifierFailure,
+                        IANAItuProbableCause.rectifierHighVoltage,
+                        IANAItuProbableCause.rectifierLowFVoltage,
+                        IANAItuProbableCause.ventilationsSystemFailure,
+                        IANAItuProbableCause.enclosureDoorOpen,
+                        IANAItuProbableCause.explosiveGas,
+                        IANAItuProbableCause.fire,
+                        IANAItuProbableCause.flood,
+                        IANAItuProbableCause.highHumidity,
+                        IANAItuProbableCause.highTemperature,
+                        IANAItuProbableCause.highWind,
+                        IANAItuProbableCause.iceBuildUp,
+                        IANAItuProbableCause.intrusionDetection,
+                        IANAItuProbableCause.lowFuel,
+                        IANAItuProbableCause.lowHumidity,
+                        IANAItuProbableCause.lowCablePressure,
+                        IANAItuProbableCause.lowTemperatue,
+                        IANAItuProbableCause.lowWater,
+                        IANAItuProbableCause.smoke,
+                        IANAItuProbableCause.toxicGas,
+                        IANAItuProbableCause.coolingSystemFailure,
+                        IANAItuProbableCause.externalEquipmentFailure,
+                        IANAItuProbableCause.externalPointFailure,
+                        IANAItuProbableCause.storageCapacityProblem,
+                        IANAItuProbableCause.memoryMismatch,
+                        IANAItuProbableCause.corruptData,
+                        IANAItuProbableCause.outOfCPUCycles,
+                        IANAItuProbableCause.sfwrEnvironmentProblem,
+                        IANAItuProbableCause.sfwrDownloadFailure,
+                        IANAItuProbableCause.lossOfRealTimel,
+                        IANAItuProbableCause.applicationSubsystemFailure,
+                        IANAItuProbableCause.configurationOrCustomisationError,
+                        IANAItuProbableCause.databaseInconsistency,
+                        IANAItuProbableCause.fileError,
+                        IANAItuProbableCause.outOfMemory,
+                        IANAItuProbableCause.softwareError,
+                        IANAItuProbableCause.timeoutExpired,
+                        IANAItuProbableCause.underlayingResourceUnavailable,
+                        IANAItuProbableCause.versionMismatch,
+                        IANAItuProbableCause.bandwidthReduced,
+                        IANAItuProbableCause.congestion,
+                        IANAItuProbableCause.excessiveErrorRate,
+                        IANAItuProbableCause.excessiveResponseTime,
+                        IANAItuProbableCause.excessiveRetransmissionRate,
+                        IANAItuProbableCause.reducedLoggingCapability,
+                        IANAItuProbableCause.systemResourcesOverload,
+                        IANAItuProbableCause.adapterError,
+                        IANAItuProbableCause.applicationSubsystemFailture,
+                        IANAItuProbableCause.bandwidthReducedX733,
+                        IANAItuProbableCause.callEstablishmentError,
+                        IANAItuProbableCause.communicationsProtocolError,
+                        IANAItuProbableCause.communicationsSubsystemFailure,
+                        IANAItuProbableCause.configurationOrCustomizationError,
+                        IANAItuProbableCause.congestionX733,
+                        IANAItuProbableCause.coruptData,
+                        IANAItuProbableCause.cpuCyclesLimitExceeded,
+                        IANAItuProbableCause.dataSetOrModemError,
+                        IANAItuProbableCause.degradedSignalX733,
+                        IANAItuProbableCause.dteDceInterfaceError,
+                        IANAItuProbableCause.enclosureDoorOpenX733,
+                        IANAItuProbableCause.equipmentMalfunction,
+                        IANAItuProbableCause.excessiveVibration,
+                        IANAItuProbableCause.fileErrorX733,
+                        IANAItuProbableCause.fireDetected,
+                        IANAItuProbableCause.framingErrorX733,
+                        IANAItuProbableCause.heatingVentCoolingSystemProblem,
+                        IANAItuProbableCause.humidityUnacceptable,
+                        IANAItuProbableCause.inputOutputDeviceError,
+                        IANAItuProbableCause.inputDeviceError,
+                        IANAItuProbableCause.lanError,
+                        IANAItuProbableCause.leakDetected,
+                        IANAItuProbableCause.localNodeTransmissionErrorX733,
+                        IANAItuProbableCause.lossOfFrameX733,
+                        IANAItuProbableCause.lossOfSignalX733,
+                        IANAItuProbableCause.materialSupplyExhausted,
+                        IANAItuProbableCause.multiplexerProblemX733,
+                        IANAItuProbableCause.outOfMemoryX733,
+                        IANAItuProbableCause.ouputDeviceError,
+                        IANAItuProbableCause.performanceDegraded,
+                        IANAItuProbableCause.powerProblems,
+                        IANAItuProbableCause.pressureUnacceptable,
+                        IANAItuProbableCause.processorProblems,
+                        IANAItuProbableCause.pumpFailureX733,
+                        IANAItuProbableCause.queueSizeExceeded,
+                        IANAItuProbableCause.receiveFailureX733,
+                        IANAItuProbableCause.receiverFailureX733,
+                        IANAItuProbableCause.remoteNodeTransmissionErrorX733,
+                        IANAItuProbableCause.resourceAtOrNearingCapacity,
+                        IANAItuProbableCause.responseTimeExecessive,
+                        IANAItuProbableCause.retransmissionRateExcessive,
+                        IANAItuProbableCause.softwareErrorX733,
+                        IANAItuProbableCause.softwareProgramAbnormallyTerminated,
+                        IANAItuProbableCause.softwareProgramError,
+                        IANAItuProbableCause.storageCapacityProblemX733,
+                        IANAItuProbableCause.temperatureUnacceptable,
+                        IANAItuProbableCause.thresholdCrossed,
+                        IANAItuProbableCause.timingProblemX733,
+                        IANAItuProbableCause.toxicLeakDetected,
+                        IANAItuProbableCause.transmitFailureX733,
+                        IANAItuProbableCause.transmiterFailure,
+                        IANAItuProbableCause.underlyingResourceUnavailable,
+                        IANAItuProbableCause.versionMismatchX733,
+                        IANAItuProbableCause.authenticationFailure,
+                        IANAItuProbableCause.breachOfConfidentiality,
+                        IANAItuProbableCause.cableTamper,
+                        IANAItuProbableCause.delayedInformation,
+                        IANAItuProbableCause.denialOfService,
+                        IANAItuProbableCause.duplicateInformation,
+                        IANAItuProbableCause.informationMissing,
+                        IANAItuProbableCause.informationModificationDetected,
+                        IANAItuProbableCause.informationOutOfSequence,
+                        IANAItuProbableCause.keyExpired,
+                        IANAItuProbableCause.nonRepudiationFailure,
+                        IANAItuProbableCause.outOfHoursActivity,
+                        IANAItuProbableCause.outOfService,
+                        IANAItuProbableCause.proceduralError,
+                        IANAItuProbableCause.unauthorizedAccessAttempt,
+                        IANAItuProbableCause.unexpectedInformation,
+                        IANAItuProbableCause.other,
+                }
+        );
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9]).
                 addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol9VC));
         ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9]).
@@ -525,10 +735,16 @@ public class Snmp4jDemoMib
 //        values[0] = new Integer32(1);
         int colCount = snmp4jDemoSparseEntry.getColumnCount();
         for (int i = 0; i < colCount; i++) {
-            if (i == 3) {
-                values[i] = new Integer32(FmSeverity.minor);
+            if (i == 0) {
+                values[i] = new UnsignedInteger32(1);
+            } else if (i == 3) {
+                values[i] = new UnsignedInteger32(FmSeverity.minor);
+            } else if (i == 7) {
+                values[i] = new UnsignedInteger32(IANAItuEventType.communicationsAlarm);
+            } else if (i == 8) {
+                values[i] = new UnsignedInteger32(IANAItuProbableCause.aIS);
             } else {
-                values[i] = new OctetString(String.valueOf(i) + "-120309");
+                values[i] = new OctetString(String.valueOf(i) + "-220309");
             }
         }
         Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
@@ -720,13 +936,13 @@ public class Snmp4jDemoMib
             //--AgentGen END
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol1() {
+        public UnsignedInteger32 getSnmp4jDemoSparseTableCol1() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol1
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol1);
+            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol1);
         }
 
-        public void setSnmp4jDemoSparseTableCol1(OctetString newColValue) {
+        public void setSnmp4jDemoSparseTableCol1(UnsignedInteger32 newColValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol1
             //--AgentGen END
             super.setValue(idxSnmp4jDemoSparseTableCol1, newColValue);
@@ -756,13 +972,13 @@ public class Snmp4jDemoMib
             super.setValue(idxSnmp4jDemoSparseTableCol3, newColValue);
         }
 
-        public Integer32 getSnmp4jDemoSparseTableCol4() {
+        public UnsignedInteger32 getSnmp4jDemoSparseTableCol4() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol4
             //--AgentGen END
-            return (Integer32) super.getValue(idxSnmp4jDemoSparseTableCol4);
+            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol4);
         }
 
-        public void setSnmp4jDemoSparseTableCol4(Integer32 newColValue) {
+        public void setSnmp4jDemoSparseTableCol4(UnsignedInteger32 newColValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol4
             //--AgentGen END
             super.setValue(idxSnmp4jDemoSparseTableCol4, newColValue);
@@ -804,25 +1020,25 @@ public class Snmp4jDemoMib
             super.setValue(idxSnmp4jDemoSparseTableCol7, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol8() {
+        public UnsignedInteger32 getSnmp4jDemoSparseTableCol8() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol8
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol8);
+            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol8);
         }
 
-        public void setSnmp4jDemoSparseTableCol8(OctetString newColValue) {
+        public void setSnmp4jDemoSparseTableCol8(UnsignedInteger32 newColValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol8
             //--AgentGen END
             super.setValue(idxSnmp4jDemoSparseTableCol8, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol9() {
+        public UnsignedInteger32 getSnmp4jDemoSparseTableCol9() {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol9
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol9);
+            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol9);
         }
 
-        public void setSnmp4jDemoSparseTableCol9(OctetString newColValue) {
+        public void setSnmp4jDemoSparseTableCol9(UnsignedInteger32 newColValue) {
             //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol9
             //--AgentGen END
             super.setValue(idxSnmp4jDemoSparseTableCol9, newColValue);
@@ -874,7 +1090,7 @@ public class Snmp4jDemoMib
             //--AgentGen END
             switch(column) {
                 case idxSnmp4jDemoSparseTableCol1:
-                    setSnmp4jDemoSparseTableCol1((OctetString)value);
+                    setSnmp4jDemoSparseTableCol1((UnsignedInteger32)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol2:
                     setSnmp4jDemoSparseTableCol2((OctetString)value);
@@ -883,7 +1099,7 @@ public class Snmp4jDemoMib
                     setSnmp4jDemoSparseTableCol3((OctetString)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol4:
-                    setSnmp4jDemoSparseTableCol4((Integer32)value);
+                    setSnmp4jDemoSparseTableCol4((UnsignedInteger32)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol5:
                     setSnmp4jDemoSparseTableCol5((OctetString)value);
@@ -895,10 +1111,10 @@ public class Snmp4jDemoMib
                     setSnmp4jDemoSparseTableCol7((OctetString)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol8:
-                    setSnmp4jDemoSparseTableCol8((OctetString)value);
+                    setSnmp4jDemoSparseTableCol8((UnsignedInteger32)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol9:
-                    setSnmp4jDemoSparseTableCol9((OctetString)value);
+                    setSnmp4jDemoSparseTableCol9((UnsignedInteger32)value);
                     break;
                 case idxSnmp4jDemoSparseTableCol10:
                     setSnmp4jDemoSparseTableCol10((OctetString)value);

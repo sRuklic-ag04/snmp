@@ -342,15 +342,15 @@ public class SampleAgent {
                 return;
             }
 
-            OctetString col1 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol1);
+            UnsignedInteger32 col1 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol1);
             OctetString col2 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol2);
             OctetString col3 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol3);
-            Integer32 col4 = (Integer32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol4);
+            UnsignedInteger32 col4 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol4);
             OctetString col5 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol5);
             OctetString col6 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol6);
             OctetString col7 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol7);
-            OctetString col8 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol8);
-            OctetString col9 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol9);
+            UnsignedInteger32 col8 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol8);
+            UnsignedInteger32 col9 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol9);
             OctetString col10 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol10);
 
             VariableBinding[] payload = new VariableBinding[10];
