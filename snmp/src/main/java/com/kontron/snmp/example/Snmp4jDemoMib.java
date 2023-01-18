@@ -66,6 +66,32 @@ public class Snmp4jDemoMib
 
     // Tables
 
+    // Notifications
+    public static final OID oidSnmp4jSparseEvent =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,2,0,1 });
+    public static final OID oidSnmp4jDemoSparseTableCol1 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,2 });
+    public static final OID oidSnmp4jDemoSparseTableCol2 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,3 });
+    public static final OID oidSnmp4jDemoSparseTableCol3 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,4 });
+    public static final OID oidSnmp4jDemoSparseTableCol4 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,5 });
+    public static final OID oidSnmp4jDemoSparseTableCol5 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,6 });
+    public static final OID oidSnmp4jDemoSparseTableCol6 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,7 });
+    public static final OID oidSnmp4jDemoSparseTableCol7 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,8 });
+    public static final OID oidSnmp4jDemoSparseTableCol8 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,9 });
+    public static final OID oidSnmp4jDemoSparseTableCol9 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,10 });
+    public static final OID oidSnmp4jDemoSparseTableCol10 =
+            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,11 });
+
+
+
     // Enumerations
     public static final class FmSeverity {
         public static final int indeterminate = 1;
@@ -381,6 +407,117 @@ public class Snmp4jDemoMib
 //--AgentGen END
     }
 
+    // Notifications
+    public void snmp4jDemoEvent(NotificationOriginator notificationOriginator,
+                                OctetString context, VariableBinding[] vbs) {
+        if (vbs.length < 10) {
+            throw new IllegalArgumentException("Too few notification objects (snmp4jDemoEvent): "+
+                    vbs.length+" < 10");
+        }
+
+        // snmp4jDemoSparseTableCol1
+        if (!(vbs[0].getOid().startsWith(oidSnmp4jDemoSparseTableCol1))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol1)) has wrong OID: " + vbs[0].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol1);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[0].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol1)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[0].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol2
+        if (!(vbs[1].getOid().startsWith(oidSnmp4jDemoSparseTableCol2))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol2)) has wrong OID: " + vbs[1].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol2);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[1].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol2)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[1].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol3
+        if (!(vbs[2].getOid().startsWith(oidSnmp4jDemoSparseTableCol3))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol3)) has wrong OID: " + vbs[2].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol3);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[2].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol3)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[2].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol4
+        if (!(vbs[3].getOid().startsWith(oidSnmp4jDemoSparseTableCol4))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol4)) has wrong OID: " + vbs[3].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol4);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[3].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol4)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[3].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol5
+        if (!(vbs[4].getOid().startsWith(oidSnmp4jDemoSparseTableCol5))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol5)) has wrong OID: " + vbs[4].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol5);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[4].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol5)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[4].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol6
+        if (!(vbs[5].getOid().startsWith(oidSnmp4jDemoSparseTableCol6))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol6)) has wrong OID: " + vbs[5].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol6);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[5].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol6)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[5].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol7
+        if (!(vbs[6].getOid().startsWith(oidSnmp4jDemoSparseTableCol7))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol7)) has wrong OID: " + vbs[6].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol7);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[6].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol7)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[6].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol8
+        if (!(vbs[7].getOid().startsWith(oidSnmp4jDemoSparseTableCol8))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol8)) has wrong OID: " + vbs[7].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol8);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[7].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol8)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[7].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol9
+        if (!(vbs[8].getOid().startsWith(oidSnmp4jDemoSparseTableCol9))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol9)) has wrong OID: " + vbs[8].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol9);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[8].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol9)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[8].getOid()));
+        }
+
+        // snmp4jDemoSparseTableCol10
+        if (!(vbs[9].getOid().startsWith(oidSnmp4jDemoSparseTableCol10))) {
+            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol10)) has wrong OID: " + vbs[9].getOid() +
+                    " does not start with "+ oidSnmp4jDemoSparseTableCol10);
+        }
+        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[9].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol10)) specified: "+
+                    snmp4jDemoSparseEntry.getIndexPart(vbs[9].getOid()));
+        }
+
+        notificationOriginator.notify(context, oidSnmp4jSparseEvent, vbs);
+    }
+
     public void setValue() {
         snmp4jDemoSparseEntryModel.clear();
 
@@ -391,7 +528,7 @@ public class Snmp4jDemoMib
             if (i == 3) {
                 values[i] = new Integer32(FmSeverity.minor);
             } else {
-                values[i] = new OctetString(String.valueOf(i) + "-20309");
+                values[i] = new OctetString(String.valueOf(i) + "-120309");
             }
         }
         Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);

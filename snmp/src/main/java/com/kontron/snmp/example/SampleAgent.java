@@ -31,6 +31,7 @@ import org.snmp4j.agent.io.*;
 import org.snmp4j.agent.io.prop.*;
 import org.snmp4j.agent.mo.*;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
+import org.snmp4j.agent.mo.snmp.TimeStamp;
 import org.snmp4j.agent.mo.snmp.dh.DHKickstartParameters;
 import org.snmp4j.agent.mo.snmp.dh.DHKickstartParametersImpl;
 import org.snmp4j.cfg.EngineBootsCounterFile;
@@ -301,6 +302,9 @@ public class SampleAgent {
     protected void registerMIBs() {
         if (modules == null) {
             modules = new Modules(getFactory());
+            modules.getSnmp4jDemoMib().getSnmp4jDemoSparseEntry().addMOTableRowListener(
+                    new SparseTableRowListener()
+            );
         }
         try {
             modules.registerMOs(server, null);
@@ -329,6 +333,82 @@ public class SampleAgent {
         } catch (DuplicateRegistrationException drex) {
             logger.error("Duplicate registration: " + drex.getMessage() + "." +
                     " MIB object registration may be incomplete!", drex);
+        }
+    }
+
+    class SparseTableRowListener implements MOTableRowListener<Snmp4jDemoMib.Snmp4jDemoSparseEntryRow> {
+        public void rowChanged(MOTableRowEvent<Snmp4jDemoMib.Snmp4jDemoSparseEntryRow> event) {
+            if ((event.getType() == MOTableRowEvent.CREATE) || (event.getType() == MOTableRowEvent.UPDATED)) {
+                // ignore
+                return;
+            }
+
+            OctetString col1 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol1);
+            OctetString col2 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol2);
+            OctetString col3 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol3);
+            Integer32 col4 = (Integer32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol4);
+            OctetString col5 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol5);
+            OctetString col6 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol6);
+            OctetString col7 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol7);
+            OctetString col8 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol8);
+            OctetString col9 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol9);
+            OctetString col10 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol10);
+
+            VariableBinding[] payload = new VariableBinding[10];
+            OID table = event.getTable().getOID();
+
+            OID colSnmp4jDemoSparseTableCol1Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol1Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol1);
+            colSnmp4jDemoSparseTableCol1Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol2Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol2Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol2);
+            colSnmp4jDemoSparseTableCol2Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol3Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol3Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol3);
+            colSnmp4jDemoSparseTableCol3Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol4Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol4Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol4);
+            colSnmp4jDemoSparseTableCol4Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol5Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol5Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol5);
+            colSnmp4jDemoSparseTableCol5Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol6Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol6Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol6);
+            colSnmp4jDemoSparseTableCol6Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol7Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol7Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol7);
+            colSnmp4jDemoSparseTableCol7Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol8Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol8Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol8);
+            colSnmp4jDemoSparseTableCol8Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol9Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol9Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol9);
+            colSnmp4jDemoSparseTableCol9Variable.append(event.getRow().getIndex());
+
+            OID colSnmp4jDemoSparseTableCol10Variable = new OID(table);
+            colSnmp4jDemoSparseTableCol10Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol10);
+            colSnmp4jDemoSparseTableCol10Variable.append(event.getRow().getIndex());
+
+            payload[0] = new VariableBinding(colSnmp4jDemoSparseTableCol1Variable, col1);
+            payload[1] = new VariableBinding(colSnmp4jDemoSparseTableCol2Variable, col2);
+            payload[2] = new VariableBinding(colSnmp4jDemoSparseTableCol3Variable, col3);
+            payload[3] = new VariableBinding(colSnmp4jDemoSparseTableCol4Variable, col4);
+            payload[4] = new VariableBinding(colSnmp4jDemoSparseTableCol5Variable, col5);
+            payload[5] = new VariableBinding(colSnmp4jDemoSparseTableCol6Variable, col6);
+            payload[6] = new VariableBinding(colSnmp4jDemoSparseTableCol7Variable, col7);
+            payload[7] = new VariableBinding(colSnmp4jDemoSparseTableCol8Variable, col8);
+            payload[8] = new VariableBinding(colSnmp4jDemoSparseTableCol9Variable, col9);
+            payload[9] = new VariableBinding(colSnmp4jDemoSparseTableCol10Variable, col10);
+            modules.getSnmp4jDemoMib().snmp4jDemoEvent(
+                    agent.getNotificationOriginator(), new OctetString(), payload);
         }
     }
 
