@@ -31,7 +31,6 @@ import org.snmp4j.agent.io.*;
 import org.snmp4j.agent.io.prop.*;
 import org.snmp4j.agent.mo.*;
 import org.snmp4j.agent.mo.snmp.SNMPv2MIB;
-import org.snmp4j.agent.mo.snmp.TimeStamp;
 import org.snmp4j.agent.mo.snmp.dh.DHKickstartParameters;
 import org.snmp4j.agent.mo.snmp.dh.DHKickstartParametersImpl;
 import org.snmp4j.cfg.EngineBootsCounterFile;
@@ -465,19 +464,6 @@ public class SampleAgent {
                 // Set the system services
                 // sampleAgent.agent.getSysServices().setValue(72);
                 sampleAgent.run();
-      /*
-      for (int i=1; i<5; i++) {
-        sampleAgent.agent.getAgentNotificationOriginator().notify(
-            new OctetString(), SnmpConstants.coldStart,
-            new VariableBinding[] {
-          new VariableBinding(new OID("1.3.6.1.4.0"), new Integer32(i)),
-          new VariableBinding(new OID("1.3.6.1.4.0"),new Counter32(278070606)),
-          new VariableBinding(new OID("1.3.6.1.4.0"),new OctetString("Hello world!")),
-          new VariableBinding(new OID("1.3.6.1.4.0"),new IpAddress("127.0.0.2")),
-          new VariableBinding(new OID("1.3.6.1.4.0"),new Gauge32(867685L))
-        });
-      }
-      */
             } catch (ParseException ex) {
                 logger.error(ex.getMessage(), ex);
             }

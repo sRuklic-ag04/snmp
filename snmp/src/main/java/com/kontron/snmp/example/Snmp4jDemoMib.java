@@ -998,6 +998,8 @@ public class Snmp4jDemoMib
 
     // Textual Definitions of other MIB modules
     public void addImportedTCsToFactory(MOFactory moFactory) {
+        moFactory.addTextualConvention(new IANAItuProbableCause(moFactory));
+        moFactory.addTextualConvention(new IANAItuEventType(moFactory));
     }
 
 
