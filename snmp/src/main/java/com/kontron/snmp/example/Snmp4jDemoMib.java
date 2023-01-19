@@ -22,7 +22,6 @@ package com.kontron.snmp.example;
 //--AgentGen BEGIN=_BEGIN
 //--AgentGen END
 
-import org.snmp4j.agent.mo.snmp.RowStatus;
 import org.snmp4j.smi.*;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.agent.*;
@@ -59,7 +58,7 @@ public class Snmp4jDemoMib
      * used for its identification.
      */
     public static final OID oidSnmp4jDemoMib =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2 });
 
     // Identities
     // Scalars
@@ -68,27 +67,27 @@ public class Snmp4jDemoMib
 
     // Notifications
     public static final OID oidSnmp4jSparseEvent =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,2,0,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,3,1 });
     public static final OID oidSnmp4jDemoSparseTableCol1 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,2 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,2 });
     public static final OID oidSnmp4jDemoSparseTableCol2 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,3 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,3 });
     public static final OID oidSnmp4jDemoSparseTableCol3 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,4 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,4 });
     public static final OID oidSnmp4jDemoSparseTableCol4 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,5 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,5 });
     public static final OID oidSnmp4jDemoSparseTableCol5 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,6 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,6 });
     public static final OID oidSnmp4jDemoSparseTableCol6 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,7 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,7 });
     public static final OID oidSnmp4jDemoSparseTableCol7 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,8 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,8 });
     public static final OID oidSnmp4jDemoSparseTableCol8 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,9 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,9 });
     public static final OID oidSnmp4jDemoSparseTableCol9 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,10 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,10 });
     public static final OID oidSnmp4jDemoSparseTableCol10 =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,11 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,11 });
 
 
 
@@ -123,11 +122,11 @@ public class Snmp4jDemoMib
     public static final String tcDefRowStatus = "RowStatus";
 
     public static final OID oidSnmp4jDemoSparseEntry =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1 });
 
     // Index OID definitions
     public static final OID oidSnmp4jDemoSparseTableIndex =
-            new OID(new int[] { 1,3,6,1,4,1,20309,10,1,1,20,1,4,1,1 });
+            new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,1 });
 
     // Column TC definitions for snmp4jDemoSparseEntry:
     public static final String tcModuleSnmp4jDemoMib = "SNMP4J-DEMO-MIB";
@@ -194,7 +193,7 @@ public class Snmp4jDemoMib
         this();
         createMO(moFactory);
 //--AgentGen BEGIN=_FACTORYCONSTRUCTOR
-        setValue();
+        initializeTable();
 //--AgentGen END
     }
 
@@ -728,11 +727,10 @@ public class Snmp4jDemoMib
         notificationOriginator.notify(context, oidSnmp4jSparseEvent, vbs);
     }
 
-    public void setValue() {
+    public void initializeTable() {
         snmp4jDemoSparseEntryModel.clear();
 
         Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-//        values[0] = new Integer32(1);
         int colCount = snmp4jDemoSparseEntry.getColumnCount();
         for (int i = 0; i < colCount; i++) {
             if (i == 0) {
@@ -744,12 +742,47 @@ public class Snmp4jDemoMib
             } else if (i == 8) {
                 values[i] = new UnsignedInteger32(IANAItuProbableCause.aIS);
             } else {
-                values[i] = new OctetString(String.valueOf(i) + "-220309");
+                values[i] = new OctetString(String.valueOf(i) + "@aaaa$$#");
             }
         }
-        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
+        Snmp4jDemoSparseEntryRow sparseEntryRow1 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
+        Snmp4jDemoSparseEntryRow sparseEntryRow2 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 2 }), values);
+        Snmp4jDemoSparseEntryRow sparseEntryRow3 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 3 }), values);
+        Snmp4jDemoSparseEntryRow sparseEntryRow4 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 4 }), values);
+
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow1);
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow2);
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow3);
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow4);
+
+        removeRow(2);
+        removeRow(1);
+
+
+    }
+
+    public void addRow(OID oid, Variable[] values) {
+        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(oid, values);
 
         snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+    }
+
+    public void addRow(int oid, Variable[] values) {
+        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { oid }), values);
+
+        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+    }
+
+    public void removeRow(OID oid) {
+        snmp4jDemoSparseEntryModel.removeRow(oid);
+    }
+
+    public void removeRow(int oid) {
+        snmp4jDemoSparseEntryModel.removeRow(new OID(new int[] { oid }));
+    }
+
+    public void clearTable() {
+        snmp4jDemoSparseEntryModel.clear();
     }
 
 
@@ -760,11 +793,16 @@ public class Snmp4jDemoMib
      */
     static class Snmp4jDemoSparseTableCol1Validator implements MOValueValidationListener {
 
+        public static final String pattern = "^[a-zA-Z0-9_\\-\\.]{1,256}$";
+
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
             OctetString os = (OctetString)newValue;
             if (!(((os.length() >= 0) && (os.length() <= 10)))) {
                 validationEvent.setValidationStatus(SnmpConstants.SNMP_ERROR_WRONG_LENGTH);
+                return;
+            } else if (!os.toString().matches(pattern)) {
+                validationEvent.setValidationStatus(SnmpConstants.SNMP_ERROR_BAD_VALUE);
                 return;
             }
             //--AgentGen BEGIN=snmp4jDemoSparseTableCol1::validate
@@ -828,11 +866,16 @@ public class Snmp4jDemoMib
      */
     static class Snmp4jDemoSparseTableCol5Validator implements MOValueValidationListener {
 
+        public static final String pattern = "^[a-zA-Z0-9_\\-\\.]+$";
+
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
             OctetString os = (OctetString)newValue;
             if (!(((os.length() >= 0) && (os.length() <= 10)))) {
                 validationEvent.setValidationStatus(SnmpConstants.SNMP_ERROR_WRONG_LENGTH);
+                return;
+            } else if (!os.toString().matches(pattern)) {
+                validationEvent.setValidationStatus(SnmpConstants.SNMP_ERROR_BAD_VALUE);
                 return;
             }
             //--AgentGen BEGIN=snmp4jDemoSparseTableCol5::validate
