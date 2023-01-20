@@ -1,23 +1,3 @@
-/*_############################################################################
-  _## 
-  _##  SNMP4J-Agent 3 - Snmp4jDemoMib.java  
-  _## 
-  _##  Copyright (C) 2005-2021  Frank Fock (SNMP4J.org)
-  _##  
-  _##  Licensed under the Apache License, Version 2.0 (the "License");
-  _##  you may not use this file except in compliance with the License.
-  _##  You may obtain a copy of the License at
-  _##  
-  _##      http://www.apache.org/licenses/LICENSE-2.0
-  _##  
-  _##  Unless required by applicable law or agreed to in writing, software
-  _##  distributed under the License is distributed on an "AS IS" BASIS,
-  _##  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  _##  See the License for the specific language governing permissions and
-  _##  limitations under the License.
-  _##  
-  _##########################################################################*/
-
 package com.kontron.snmp.example;
 //--AgentGen BEGIN=_BEGIN
 //--AgentGen END
@@ -34,7 +14,7 @@ import org.snmp4j.agent.mo.snmp.tc.*;
 //--AgentGen BEGIN=_IMPORT
 //--AgentGen END
 
-public class Snmp4jDemoMib
+public class FmAlarmMib
 //--AgentGen BEGIN=_EXTENDS
 //--AgentGen END
         implements MOGroup
@@ -42,7 +22,7 @@ public class Snmp4jDemoMib
 //--AgentGen END
 {
 
-    private static final LogAdapter LOGGER = LogFactory.getLogger(Snmp4jDemoMib.class);
+    private static final LogAdapter LOGGER = LogFactory.getLogger(FmAlarmMib.class);
 
     //--AgentGen BEGIN=_STATIC
     //--AgentGen END
@@ -57,7 +37,7 @@ public class Snmp4jDemoMib
      * OID of this MIB module for usage which can be
      * used for its identification.
      */
-    public static final OID oidSnmp4jDemoMib =
+    public static final OID oidFmAlarmMib =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2 });
 
     // Identities
@@ -66,46 +46,37 @@ public class Snmp4jDemoMib
     // Tables
 
     // Notifications
-    public static final OID oidSnmp4jSparseEvent =
+    public static final OID oidFmAlarmNotification =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,3,1 });
-    public static final OID oidSnmp4jDemoSparseTableCol1 =
+    public static final OID oidFmAlarmId =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,2 });
-    public static final OID oidSnmp4jDemoSparseTableCol2 =
+    public static final OID oidFmAlarmNodeName =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,3 });
-    public static final OID oidSnmp4jDemoSparseTableCol3 =
+    public static final OID oidFmAlarmDateAndTime =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,4 });
-    public static final OID oidSnmp4jDemoSparseTableCol4 =
+    public static final OID oidFmAlarmSeverity =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,5 });
-    public static final OID oidSnmp4jDemoSparseTableCol5 =
+    public static final OID oidFmAlarmFaultCode =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,6 });
-    public static final OID oidSnmp4jDemoSparseTableCol6 =
+    public static final OID oidFmAlarmMessage =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,7 });
-    public static final OID oidSnmp4jDemoSparseTableCol7 =
+    public static final OID oidFmAlarmComponentName =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,8 });
-    public static final OID oidSnmp4jDemoSparseTableCol8 =
+    public static final OID oidFmAlarmEventType =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,9 });
-    public static final OID oidSnmp4jDemoSparseTableCol9 =
+    public static final OID oidFmAlarmProbableCause =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,10 });
-    public static final OID oidSnmp4jDemoSparseTableCol10 =
+    public static final OID oidFmAlarmAttributes =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,11 });
 
 
 
     // Enumerations
-    public static final class FmSeverity {
-        public static final int indeterminate = 1;
-        public static final int cleared = 2;
-        public static final int normal = 3;
-        public static final int warning = 4;
-        public static final int minor = 5;
-        public static final int major = 6;
-        public static final int critical = 7;
-    }
 
     // TextualConventions
     private static final String TC_MODULE_SNMPV2_TC = "SNMPv2-TC";
-    private static final String TC_MODULE_SNMP4J_DEMO_MIB = "SNMP4J-DEMO-MIB";
-    private static final String TC_SPARSETABLECOLUMN = "SparseTableColumn";
+    private static final String TC_MODULE_KTR_FM_MIB = "KTR-FM-MIB";
+    private static final String TC_FMALARMCOLUMN = "FmAlarmColumn";
     private static final String TC_STORAGETYPE = "StorageType";
     private static final String TC_DISPLAYSTRING = "DisplayString";
     private static final String TC_ROWSTATUS = "RowStatus";
@@ -121,67 +92,67 @@ public class Snmp4jDemoMib
     public static final String tcDefStorageType = "StorageType";
     public static final String tcDefRowStatus = "RowStatus";
 
-    public static final OID oidSnmp4jDemoSparseEntry =
+    public static final OID oidFmAlarmActiveEntry =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1 });
 
     // Index OID definitions
-    public static final OID oidSnmp4jDemoSparseTableIndex =
+    public static final OID oidFmAlarmIndex =
             new OID(new int[] { 1,3,6,1,4,1,20306,11,2,1,1,1,1 });
 
-    // Column TC definitions for snmp4jDemoSparseEntry:
+    // Column TC definitions for fmAlarmEntry:
     public static final String tcModuleSnmp4jDemoMib = "SNMP4J-DEMO-MIB";
-    public static final String tcDefSparseTableColumn = "SparseTableColumn";
+    public static final String tcDefSparseTableColumn = "FmAlarmColumn";
 
-    // Column sub-identifier definitions for snmp4jDemoSparseEntry:
-    public static final int colSnmp4jDemoSparseTableCol1 = 2;
-    public static final int colSnmp4jDemoSparseTableCol2 = 3;
-    public static final int colSnmp4jDemoSparseTableCol3 = 4;
-    public static final int colSnmp4jDemoSparseTableCol4 = 5;
-    public static final int colSnmp4jDemoSparseTableCol5 = 6;
-    public static final int colSnmp4jDemoSparseTableCol6 = 7;
-    public static final int colSnmp4jDemoSparseTableCol7 = 8;
-    public static final int colSnmp4jDemoSparseTableCol8 = 9;
-    public static final int colSnmp4jDemoSparseTableCol9 = 10;
-    public static final int colSnmp4jDemoSparseTableCol10 = 11;
+    // Column sub-identifier definitions for fmAlarmEntry:
+    public static final int colFmAlarmId = 2;
+    public static final int colFmAlarmNodeName = 3;
+    public static final int colFmAlarmDateAndTime = 4;
+    public static final int colFmAlarmSeverity = 5;
+    public static final int colFmAlarmFaultCode = 6;
+    public static final int colFmAlarmMessage = 7;
+    public static final int colFmAlarmComponentName = 8;
+    public static final int colFmAlarmEventType = 9;
+    public static final int colFmAlarmProbableCause = 10;
+    public static final int colFmAlarmAttributes = 11;
 
-    // Column index definitions for snmp4jDemoSparseEntry:
-    public static final int idxSnmp4jDemoSparseTableCol1 = 0;
-    public static final int idxSnmp4jDemoSparseTableCol2 = 1;
-    public static final int idxSnmp4jDemoSparseTableCol3 = 2;
-    public static final int idxSnmp4jDemoSparseTableCol4 = 3;
-    public static final int idxSnmp4jDemoSparseTableCol5 = 4;
-    public static final int idxSnmp4jDemoSparseTableCol6 = 5;
-    public static final int idxSnmp4jDemoSparseTableCol7 = 6;
-    public static final int idxSnmp4jDemoSparseTableCol8 = 7;
-    public static final int idxSnmp4jDemoSparseTableCol9 = 8;
-    public static final int idxSnmp4jDemoSparseTableCol10 = 9;
+    // Column index definitions for fmAlarmEntry:
+    public static final int idxFmAlarmId = 0;
+    public static final int idxFmAlarmNodeName = 1;
+    public static final int idxFmAlarmDateAndTime = 2;
+    public static final int idxFmAlarmSeverity = 3;
+    public static final int idxFmAlarmFaultCode = 4;
+    public static final int idxFmAlarmMessage = 5;
+    public static final int idxFmAlarmComponentName = 6;
+    public static final int idxFmAlarmEventType = 7;
+    public static final int idxFmAlarmProbableCause = 8;
+    public static final int idxFmAlarmAttributes = 9;
 
-    private MOTableSubIndex[] snmp4jDemoSparseEntryIndexes;
-    private MOTableIndex snmp4jDemoSparseEntryIndex;
+    private MOTableSubIndex[] fmAlarmEntryIndexes;
+    private MOTableIndex fmAlarmEntryIndex;
 
     @SuppressWarnings("rawtypes")
-    private MOTable<Snmp4jDemoSparseEntryRow,
+    private MOTable<FmAlarmEntryRow,
             MOColumn,
-            MOMutableTableModel<Snmp4jDemoSparseEntryRow>> snmp4jDemoSparseEntry;
-    private MOMutableTableModel<Snmp4jDemoSparseEntryRow> snmp4jDemoSparseEntryModel;
+            MOMutableTableModel<FmAlarmEntryRow>> fmAlarmEntry;
+    private MOMutableTableModel<FmAlarmEntryRow> fmAlarmEntryModel;
 
 
 //--AgentGen BEGIN=_MEMBERS
 //--AgentGen END
 
     /**
-     * Constructs a Snmp4jDemoMib instance without actually creating its
+     * Constructs a FmAlarmMib instance without actually creating its
      * {@code ManagedObject} instances. This has to be done in a
      * sub-class constructor or after construction by calling
      * {@link #createMO(MOFactory moFactory)}.
      */
-    protected Snmp4jDemoMib() {
+    protected FmAlarmMib() {
 //--AgentGen BEGIN=_DEFAULTCONSTRUCTOR
 //--AgentGen END
     }
 
     /**
-     * Constructs a Snmp4jDemoMib instance and actually creates its
+     * Constructs a FmAlarmMib instance and actually creates its
      * {@code ManagedObject} instances using the supplied
      * {@code MOFactory} (by calling
      * {@link #createMO(MOFactory moFactory)}).
@@ -189,7 +160,7 @@ public class Snmp4jDemoMib
      *    the {@code MOFactory} to be used to create the
      *    managed objects for this module.
      */
-    public Snmp4jDemoMib(MOFactory moFactory) {
+    public FmAlarmMib(MOFactory moFactory) {
         this();
         createMO(moFactory);
 //--AgentGen BEGIN=_FACTORYCONSTRUCTOR
@@ -209,84 +180,84 @@ public class Snmp4jDemoMib
      */
     protected void createMO(MOFactory moFactory) {
         addTCsToFactory(moFactory);
-        createSnmp4jDemoSparseEntry(moFactory);
+        createFmAlarmEntry(moFactory);
     }
 
     @SuppressWarnings("rawtypes")
-    public MOTable<Snmp4jDemoSparseEntryRow,MOColumn,MOMutableTableModel<Snmp4jDemoSparseEntryRow>> getSnmp4jDemoSparseEntry() {
-        return snmp4jDemoSparseEntry;
+    public MOTable<FmAlarmEntryRow,MOColumn,MOMutableTableModel<FmAlarmEntryRow>> getFmAlarmEntry() {
+        return fmAlarmEntry;
     }
 
 
     @SuppressWarnings(value={"unchecked"})
-    private void createSnmp4jDemoSparseEntry(MOFactory moFactory) {
+    private void createFmAlarmEntry(MOFactory moFactory) {
         // Index definition
-        snmp4jDemoSparseEntryIndexes =
+        fmAlarmEntryIndexes =
                 new MOTableSubIndex[] {
-                        moFactory.createSubIndex(oidSnmp4jDemoSparseTableIndex,
+                        moFactory.createSubIndex(oidFmAlarmIndex,
                                 SMIConstants.SYNTAX_INTEGER, 1, 1)    };
 
-        snmp4jDemoSparseEntryIndex =
-                moFactory.createIndex(snmp4jDemoSparseEntryIndexes,
+        fmAlarmEntryIndex =
+                moFactory.createIndex(fmAlarmEntryIndexes,
                         false,
                         new MOTableIndexValidator() {
                             public boolean isValidIndex(OID index) {
                                 boolean isValidIndex = true;
-                                //--AgentGen BEGIN=snmp4jDemoSparseEntry::isValidIndex
+                                //--AgentGen BEGIN=fmAlarmEntry::isValidIndex
                                 //--AgentGen END
                                 return isValidIndex;
                             }
                         });
 
         // Columns
-        MOColumn<?>[] snmp4jDemoSparseEntryColumns = new MOColumn<?>[10];
+        MOColumn<?>[] fmAlarmEntryColumns = new MOColumn<?>[10];
 
         // col1 UnsignedInteger32
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1] =
-                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol1,
+        fmAlarmEntryColumns[idxFmAlarmId] =
+                new MOMutableColumn<UnsignedInteger32>(colFmAlarmId,
                         SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (UnsignedInteger32)null);
-        ValueConstraint snmp4jDemoSparseTableCol1VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol1VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol1VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol1]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol1Validator());
+        ValueConstraint fmAlarmIdVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmIdVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmId]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmIdVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmId]).
+                addMOValueValidationListener(new FmAlarmIdValidator());
 
         // col2
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol2] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol2,
+        fmAlarmEntryColumns[idxFmAlarmNodeName] =
+                new MOMutableColumn<OctetString>(colFmAlarmNodeName,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol2VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol2VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol2]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol2VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol2]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol2Validator());
+        ValueConstraint fmAlarmNodeNameVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmNodeNameVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmNodeName]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmNodeNameVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmNodeName]).
+                addMOValueValidationListener(new FmAlarmNodeNameValidator());
 
         // col3
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol3] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol3,
+        fmAlarmEntryColumns[idxFmAlarmDateAndTime] =
+                new MOMutableColumn<OctetString>(colFmAlarmDateAndTime,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol3VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol3VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol3]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol3VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol3]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol3Validator());
+        ValueConstraint fmAlarmDateAndTimeVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmDateAndTimeVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmDateAndTime]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmDateAndTimeVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmDateAndTime]).
+                addMOValueValidationListener(new FmAlarmDateAndTimeValidator());
 
         // col4
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4] =
-                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol4,
+        fmAlarmEntryColumns[idxFmAlarmSeverity] =
+                new MOMutableColumn<UnsignedInteger32>(colFmAlarmSeverity,
                         SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (UnsignedInteger32)null);
-        ValueConstraint snmp4jDemoSparseTableCol4VC = new EnumerationConstraint(
+        ValueConstraint fmAlarmSeverityVC = new EnumerationConstraint(
                 new int[] {
                         FmSeverity.indeterminate,
                         FmSeverity.cleared,
@@ -297,57 +268,57 @@ public class Snmp4jDemoMib
                         FmSeverity.critical
                 }
         );
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol4VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol4]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol4Validator());
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmSeverity]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmSeverityVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmSeverity]).
+                addMOValueValidationListener(new FmAlarmSeverityValidator());
 
         // col5
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol5] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol5,
+        fmAlarmEntryColumns[idxFmAlarmFaultCode] =
+                new MOMutableColumn<OctetString>(colFmAlarmFaultCode,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol5VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol5VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol5]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol5VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol5]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol5Validator());
+        ValueConstraint fmAlarmFaultCodeVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmFaultCodeVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmFaultCode]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmFaultCodeVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmFaultCode]).
+                addMOValueValidationListener(new FmAlarmFaultCodeValidator());
 
         // col6
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol6] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol6,
+        fmAlarmEntryColumns[idxFmAlarmMessage] =
+                new MOMutableColumn<OctetString>(colFmAlarmMessage,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol6VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol6VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol6]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol6VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol6]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol6Validator());
+        ValueConstraint fmAlarmMessageVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmMessageVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmMessage]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmMessageVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmMessage]).
+                addMOValueValidationListener(new FmAlarmMessageValidator());
 
         // col7
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol7,
+        fmAlarmEntryColumns[idxFmAlarmComponentName] =
+                new MOMutableColumn<OctetString>(colFmAlarmComponentName,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol7VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol7VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol7VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol7]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol7Validator());
+        ValueConstraint fmAlarmComponentNameVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmComponentNameVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmComponentName]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmComponentNameVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmComponentName]).
+                addMOValueValidationListener(new FmAlarmComponentNameValidator());
 
         // col8 IANAItuEventType
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8] =
-                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol8,
+        fmAlarmEntryColumns[idxFmAlarmEventType] =
+                new MOMutableColumn<UnsignedInteger32>(colFmAlarmEventType,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (UnsignedInteger32)null);
-        ValueConstraint snmp4jDemoSparseTableCol8VC = new EnumerationConstraint(
+        ValueConstraint fmAlarmEventTypeVC = new EnumerationConstraint(
                 new int[] {
                         IANAItuEventType.other,
                         IANAItuEventType.communicationsAlarm,
@@ -362,18 +333,18 @@ public class Snmp4jDemoMib
                         IANAItuEventType.timeDomainViolation
                 }
         );
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol8VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol8]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol8Validator());
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmEventType]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmEventTypeVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmEventType]).
+                addMOValueValidationListener(new FmAlarmEventTypeValidator());
 
         // col9 IANAItuProbableCause
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9] =
-                new MOMutableColumn<UnsignedInteger32>(colSnmp4jDemoSparseTableCol9,
+        fmAlarmEntryColumns[idxFmAlarmProbableCause] =
+                new MOMutableColumn<UnsignedInteger32>(colFmAlarmProbableCause,
                         SMIConstants.SYNTAX_UNSIGNED_INTEGER32,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (UnsignedInteger32)null);
-        ValueConstraint snmp4jDemoSparseTableCol9VC = new EnumerationConstraint(
+        ValueConstraint fmAlarmProbableCauseVC = new EnumerationConstraint(
                 new int[] {
                         IANAItuProbableCause.aIS,
                         IANAItuProbableCause.callSetUpFailure,
@@ -567,35 +538,35 @@ public class Snmp4jDemoMib
                         IANAItuProbableCause.other,
                 }
         );
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol9VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol9]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol9Validator());
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmProbableCause]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmProbableCauseVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmProbableCause]).
+                addMOValueValidationListener(new FmAlarmProbableCauseValidator());
 
         // col10
-        snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol10] =
-                new MOMutableColumn<OctetString>(colSnmp4jDemoSparseTableCol10,
+        fmAlarmEntryColumns[idxFmAlarmAttributes] =
+                new MOMutableColumn<OctetString>(colFmAlarmAttributes,
                         SMIConstants.SYNTAX_OCTET_STRING,
                         moFactory.createAccess(MOAccessImpl.ACCESSIBLE_FOR_READ_CREATE),
                         (OctetString)null);
-        ValueConstraint snmp4jDemoSparseTableCol10VC = new ConstraintsImpl();
-        ((ConstraintsImpl)snmp4jDemoSparseTableCol10VC).add(new Constraint(0L, 10L));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol10]).
-                addMOValueValidationListener(new ValueConstraintValidator(snmp4jDemoSparseTableCol10VC));
-        ((MOMutableColumn)snmp4jDemoSparseEntryColumns[idxSnmp4jDemoSparseTableCol10]).
-                addMOValueValidationListener(new Snmp4jDemoSparseTableCol10Validator());
+        ValueConstraint fmAlarmAttributesVC = new ConstraintsImpl();
+        ((ConstraintsImpl)fmAlarmAttributesVC).add(new Constraint(0L, 10L));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmAttributes]).
+                addMOValueValidationListener(new ValueConstraintValidator(fmAlarmAttributesVC));
+        ((MOMutableColumn)fmAlarmEntryColumns[idxFmAlarmAttributes]).
+                addMOValueValidationListener(new FmAlarmAttributesValidator());
 
         // Table model
-        snmp4jDemoSparseEntryModel =
-                moFactory.createTableModel(oidSnmp4jDemoSparseEntry,
-                        snmp4jDemoSparseEntryIndex,
-                        snmp4jDemoSparseEntryColumns);
-        snmp4jDemoSparseEntryModel.setRowFactory(new Snmp4jDemoSparseEntryRowFactory());
-        snmp4jDemoSparseEntry =
-                moFactory.createTable(oidSnmp4jDemoSparseEntry,
-                        snmp4jDemoSparseEntryIndex,
-                        snmp4jDemoSparseEntryColumns,
-                        snmp4jDemoSparseEntryModel);
+        fmAlarmEntryModel =
+                moFactory.createTableModel(oidFmAlarmActiveEntry,
+                        fmAlarmEntryIndex,
+                        fmAlarmEntryColumns);
+        fmAlarmEntryModel.setRowFactory(new FmAlarmEntryRowFactory());
+        fmAlarmEntry =
+                moFactory.createTable(oidFmAlarmActiveEntry,
+                        fmAlarmEntryIndex,
+                        fmAlarmEntryColumns,
+                        fmAlarmEntryModel);
     }
 
 
@@ -604,134 +575,134 @@ public class Snmp4jDemoMib
             throws DuplicateRegistrationException
     {
         // Scalar Objects
-        server.register(this.snmp4jDemoSparseEntry, context);
+        server.register(this.fmAlarmEntry, context);
 //--AgentGen BEGIN=_registerMOs
 //--AgentGen END
     }
 
     public void unregisterMOs(MOServer server, OctetString context) {
         // Scalar Objects
-        server.unregister(this.snmp4jDemoSparseEntry, context);
+        server.unregister(this.fmAlarmEntry, context);
 //--AgentGen BEGIN=_unregisterMOs
 //--AgentGen END
     }
 
     // Notifications
-    public void snmp4jDemoEvent(NotificationOriginator notificationOriginator,
-                                OctetString context, VariableBinding[] vbs) {
+    public void fmAlarmNotification(NotificationOriginator notificationOriginator,
+                                    OctetString context, VariableBinding[] vbs) {
         if (vbs.length < 10) {
             throw new IllegalArgumentException("Too few notification objects (snmp4jDemoEvent): "+
                     vbs.length+" < 10");
         }
 
         // snmp4jDemoSparseTableCol1
-        if (!(vbs[0].getOid().startsWith(oidSnmp4jDemoSparseTableCol1))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol1)) has wrong OID: " + vbs[0].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol1);
+        if (!(vbs[0].getOid().startsWith(oidFmAlarmId))) {
+            throw new IllegalArgumentException("Variable 0 (fmAlarmId)) has wrong OID: " + vbs[0].getOid() +
+                    " does not start with "+ oidFmAlarmId);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[0].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol1)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[0].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[0].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 0 (fmAlarmId)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[0].getOid()));
         }
 
         // snmp4jDemoSparseTableCol2
-        if (!(vbs[1].getOid().startsWith(oidSnmp4jDemoSparseTableCol2))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol2)) has wrong OID: " + vbs[1].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol2);
+        if (!(vbs[1].getOid().startsWith(oidFmAlarmNodeName))) {
+            throw new IllegalArgumentException("Variable 1 (fmAlarmNodeName)) has wrong OID: " + vbs[1].getOid() +
+                    " does not start with "+ oidFmAlarmNodeName);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[1].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol2)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[1].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[1].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 1 (fmAlarmNodeName)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[1].getOid()));
         }
 
         // snmp4jDemoSparseTableCol3
-        if (!(vbs[2].getOid().startsWith(oidSnmp4jDemoSparseTableCol3))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol3)) has wrong OID: " + vbs[2].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol3);
+        if (!(vbs[2].getOid().startsWith(oidFmAlarmDateAndTime))) {
+            throw new IllegalArgumentException("Variable 2 (fmAlarmDateAndTime)) has wrong OID: " + vbs[2].getOid() +
+                    " does not start with "+ oidFmAlarmDateAndTime);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[2].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol3)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[2].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[2].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 2 (fmAlarmDateAndTime)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[2].getOid()));
         }
 
         // snmp4jDemoSparseTableCol4
-        if (!(vbs[3].getOid().startsWith(oidSnmp4jDemoSparseTableCol4))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol4)) has wrong OID: " + vbs[3].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol4);
+        if (!(vbs[3].getOid().startsWith(oidFmAlarmSeverity))) {
+            throw new IllegalArgumentException("Variable 3 (fmAlarmSeverity)) has wrong OID: " + vbs[3].getOid() +
+                    " does not start with "+ oidFmAlarmSeverity);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[3].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol4)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[3].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[3].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 3 (fmAlarmSeverity)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[3].getOid()));
         }
 
         // snmp4jDemoSparseTableCol5
-        if (!(vbs[4].getOid().startsWith(oidSnmp4jDemoSparseTableCol5))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol5)) has wrong OID: " + vbs[4].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol5);
+        if (!(vbs[4].getOid().startsWith(oidFmAlarmFaultCode))) {
+            throw new IllegalArgumentException("Variable 4 (fmAlarmFaultCode)) has wrong OID: " + vbs[4].getOid() +
+                    " does not start with "+ oidFmAlarmFaultCode);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[4].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol5)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[4].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[4].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 4 (fmAlarmFaultCode)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[4].getOid()));
         }
 
         // snmp4jDemoSparseTableCol6
-        if (!(vbs[5].getOid().startsWith(oidSnmp4jDemoSparseTableCol6))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol6)) has wrong OID: " + vbs[5].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol6);
+        if (!(vbs[5].getOid().startsWith(oidFmAlarmMessage))) {
+            throw new IllegalArgumentException("Variable 5 (fmAlarmMessage)) has wrong OID: " + vbs[5].getOid() +
+                    " does not start with "+ oidFmAlarmMessage);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[5].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol6)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[5].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[5].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 5 (fmAlarmMessage)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[5].getOid()));
         }
 
         // snmp4jDemoSparseTableCol7
-        if (!(vbs[6].getOid().startsWith(oidSnmp4jDemoSparseTableCol7))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol7)) has wrong OID: " + vbs[6].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol7);
+        if (!(vbs[6].getOid().startsWith(oidFmAlarmComponentName))) {
+            throw new IllegalArgumentException("Variable 6 (fmAlarmComponentName)) has wrong OID: " + vbs[6].getOid() +
+                    " does not start with "+ oidFmAlarmComponentName);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[6].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol7)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[6].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[6].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 6 (fmAlarmComponentName)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[6].getOid()));
         }
 
         // snmp4jDemoSparseTableCol8
-        if (!(vbs[7].getOid().startsWith(oidSnmp4jDemoSparseTableCol8))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol8)) has wrong OID: " + vbs[7].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol8);
+        if (!(vbs[7].getOid().startsWith(oidFmAlarmEventType))) {
+            throw new IllegalArgumentException("Variable 7 (fmAlarmEventType)) has wrong OID: " + vbs[7].getOid() +
+                    " does not start with "+ oidFmAlarmEventType);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[7].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol8)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[7].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[7].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 7 (fmAlarmEventType)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[7].getOid()));
         }
 
         // snmp4jDemoSparseTableCol9
-        if (!(vbs[8].getOid().startsWith(oidSnmp4jDemoSparseTableCol9))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol9)) has wrong OID: " + vbs[8].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol9);
+        if (!(vbs[8].getOid().startsWith(oidFmAlarmProbableCause))) {
+            throw new IllegalArgumentException("Variable 8 (fmAlarmProbableCause)) has wrong OID: " + vbs[8].getOid() +
+                    " does not start with "+ oidFmAlarmProbableCause);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[8].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol9)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[8].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[8].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 8 (fmAlarmProbableCause)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[8].getOid()));
         }
 
         // snmp4jDemoSparseTableCol10
-        if (!(vbs[9].getOid().startsWith(oidSnmp4jDemoSparseTableCol10))) {
-            throw new IllegalArgumentException("Variable 0 (snmp4jDemoSparseTableCol10)) has wrong OID: " + vbs[9].getOid() +
-                    " does not start with "+ oidSnmp4jDemoSparseTableCol10);
+        if (!(vbs[9].getOid().startsWith(oidFmAlarmAttributes))) {
+            throw new IllegalArgumentException("Variable 9 (fmAlarmAttributes)) has wrong OID: " + vbs[9].getOid() +
+                    " does not start with "+ oidFmAlarmAttributes);
         }
-        if (!snmp4jDemoSparseEntryIndex.isValidIndex(snmp4jDemoSparseEntry.getIndexPart(vbs[9].getOid()))) {
-            throw new IllegalArgumentException("Illegal index for variable 0 (snmp4jDemoSparseTableCol10)) specified: "+
-                    snmp4jDemoSparseEntry.getIndexPart(vbs[9].getOid()));
+        if (!fmAlarmEntryIndex.isValidIndex(fmAlarmEntry.getIndexPart(vbs[9].getOid()))) {
+            throw new IllegalArgumentException("Illegal index for variable 9 (fmAlarmAttributes)) specified: "+
+                    fmAlarmEntry.getIndexPart(vbs[9].getOid()));
         }
 
-        notificationOriginator.notify(context, oidSnmp4jSparseEvent, vbs);
+        notificationOriginator.notify(context, oidFmAlarmNotification, vbs);
     }
 
     public void initializeTable() {
-        snmp4jDemoSparseEntryModel.clear();
+        fmAlarmEntryModel.clear();
 
-        Variable[] values = new Variable[snmp4jDemoSparseEntry.getColumnCount()];
-        int colCount = snmp4jDemoSparseEntry.getColumnCount();
+        Variable[] values = new Variable[fmAlarmEntry.getColumnCount()];
+        int colCount = fmAlarmEntry.getColumnCount();
         for (int i = 0; i < colCount; i++) {
             if (i == 0) {
                 values[i] = new UnsignedInteger32(1);
@@ -742,56 +713,55 @@ public class Snmp4jDemoMib
             } else if (i == 8) {
                 values[i] = new UnsignedInteger32(IANAItuProbableCause.aIS);
             } else {
-                values[i] = new OctetString(String.valueOf(i) + "@aaaa$$#");
+                values[i] = new OctetString(String.valueOf(i) + "bbbbbb");
             }
         }
-        Snmp4jDemoSparseEntryRow sparseEntryRow1 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 1 }), values);
-        Snmp4jDemoSparseEntryRow sparseEntryRow2 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 2 }), values);
-        Snmp4jDemoSparseEntryRow sparseEntryRow3 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 3 }), values);
-        Snmp4jDemoSparseEntryRow sparseEntryRow4 = new Snmp4jDemoSparseEntryRow(new OID(new int[] { 4 }), values);
 
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow1);
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow2);
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow3);
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow4);
+        FmAlarmEntryRow fmAlarmEntryRow1 = new FmAlarmEntryRow(new OID(new int[] { 1 }), values);
+        FmAlarmEntryRow fmAlarmEntryRow2 = new FmAlarmEntryRow(new OID(new int[] { 2 }), values);
+        FmAlarmEntryRow fmAlarmEntryRow3 = new FmAlarmEntryRow(new OID(new int[] { 3 }), values);
+        FmAlarmEntryRow fmAlarmEntryRow4 = new FmAlarmEntryRow(new OID(new int[] { 4 }), values);
+
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow1);
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow2);
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow3);
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow4);
 
         removeRow(2);
         removeRow(1);
-
-
     }
 
     public void addRow(OID oid, Variable[] values) {
-        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(oid, values);
+        FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(oid, values);
 
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
 
     public void addRow(int oid, Variable[] values) {
-        Snmp4jDemoSparseEntryRow sparseEntryRow = new Snmp4jDemoSparseEntryRow(new OID(new int[] { oid }), values);
+        FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(new OID(new int[] { oid }), values);
 
-        snmp4jDemoSparseEntryModel.addRow(sparseEntryRow);
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
 
     public void removeRow(OID oid) {
-        snmp4jDemoSparseEntryModel.removeRow(oid);
+        fmAlarmEntryModel.removeRow(oid);
     }
 
     public void removeRow(int oid) {
-        snmp4jDemoSparseEntryModel.removeRow(new OID(new int[] { oid }));
+        fmAlarmEntryModel.removeRow(new OID(new int[] { oid }));
     }
 
     public void clearTable() {
-        snmp4jDemoSparseEntryModel.clear();
+        fmAlarmEntryModel.clear();
     }
 
 
     // Value Validators
     /**
-     * The {@code Snmp4jDemoSparseTableCol1Validator} implements the value
+     * The {@code FmAlarmIdValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol1}.
      */
-    static class Snmp4jDemoSparseTableCol1Validator implements MOValueValidationListener {
+    static class FmAlarmIdValidator implements MOValueValidationListener {
 
         public static final String pattern = "^[a-zA-Z0-9_\\-\\.]{1,256}$";
 
@@ -810,10 +780,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol2Validator} implements the value
+     * The {@code FmAlarmNodeNameValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol2}.
      */
-    static class Snmp4jDemoSparseTableCol2Validator implements MOValueValidationListener {
+    static class FmAlarmNodeNameValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -827,10 +797,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol3Validator} implements the value
+     * The {@code FmAlarmDateAndTimeValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol3}.
      */
-    static class Snmp4jDemoSparseTableCol3Validator implements MOValueValidationListener {
+    static class FmAlarmDateAndTimeValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -844,10 +814,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol4Validator} implements the value
+     * The {@code FmAlarmSeverityValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol4}.
      */
-    static class Snmp4jDemoSparseTableCol4Validator implements MOValueValidationListener {
+    static class FmAlarmSeverityValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -861,10 +831,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol5Validator} implements the value
+     * The {@code FmAlarmFaultCodeValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol5}.
      */
-    static class Snmp4jDemoSparseTableCol5Validator implements MOValueValidationListener {
+    static class FmAlarmFaultCodeValidator implements MOValueValidationListener {
 
         public static final String pattern = "^[a-zA-Z0-9_\\-\\.]+$";
 
@@ -883,10 +853,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol6Validator} implements the value
+     * The {@code FmAlarmMessageValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol6}.
      */
-    static class Snmp4jDemoSparseTableCol6Validator implements MOValueValidationListener {
+    static class FmAlarmMessageValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -900,10 +870,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol7Validator} implements the value
+     * The {@code FmAlarmComponentNameValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol7}.
      */
-    static class Snmp4jDemoSparseTableCol7Validator implements MOValueValidationListener {
+    static class FmAlarmComponentNameValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -917,10 +887,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol8Validator} implements the value
+     * The {@code FmAlarmEventTypeValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol8}.
      */
-    static class Snmp4jDemoSparseTableCol8Validator implements MOValueValidationListener {
+    static class FmAlarmEventTypeValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -934,10 +904,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol9Validator} implements the value
+     * The {@code FmAlarmProbableCauseValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol9}.
      */
-    static class Snmp4jDemoSparseTableCol9Validator implements MOValueValidationListener {
+    static class FmAlarmProbableCauseValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -951,10 +921,10 @@ public class Snmp4jDemoMib
         }
     }
     /**
-     * The {@code Snmp4jDemoSparseTableCol10Validator} implements the value
+     * The {@code FmAlarmAttributesValidator} implements the value
      * validation for {@code Snmp4jDemoSparseTableCol10}.
      */
-    static class Snmp4jDemoSparseTableCol10Validator implements MOValueValidationListener {
+    static class FmAlarmAttributesValidator implements MOValueValidationListener {
 
         public void validate(MOValueValidationEvent validationEvent) {
             Variable newValue = validationEvent.getNewValue();
@@ -968,228 +938,228 @@ public class Snmp4jDemoMib
         }
     }
 
-    public class Snmp4jDemoSparseEntryRow extends DefaultMOMutableRow2PC {
+    public class FmAlarmEntryRow extends DefaultMOMutableRow2PC {
 
-        //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowMembers
+        //--AgentGen BEGIN=fmAlarmEntry::RowMembers
         //--AgentGen END
 
-        public Snmp4jDemoSparseEntryRow(OID index, Variable[] values) {
+        public FmAlarmEntryRow(OID index, Variable[] values) {
             super(index, values);
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowConstructor
+            //--AgentGen BEGIN=fmAlarmEntry::RowConstructor
             //--AgentGen END
         }
 
-        public UnsignedInteger32 getSnmp4jDemoSparseTableCol1() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol1
+        public UnsignedInteger32 getFmAlarmId() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol1
             //--AgentGen END
-            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol1);
+            return (UnsignedInteger32) super.getValue(idxFmAlarmId);
         }
 
-        public void setSnmp4jDemoSparseTableCol1(UnsignedInteger32 newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol1
+        public void setFmAlarmId(UnsignedInteger32 newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol1
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol1, newColValue);
+            super.setValue(idxFmAlarmId, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol2() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol2
+        public OctetString getFmAlarmNodeName() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol2
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol2);
+            return (OctetString) super.getValue(idxFmAlarmNodeName);
         }
 
-        public void setSnmp4jDemoSparseTableCol2(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol2
+        public void setFmAlarmNodeName(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol2
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol2, newColValue);
+            super.setValue(idxFmAlarmNodeName, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol3() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol3
+        public OctetString getFmAlarmDateAndTime() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol3
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol3);
+            return (OctetString) super.getValue(idxFmAlarmDateAndTime);
         }
 
-        public void setSnmp4jDemoSparseTableCol3(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol3
+        public void setFmAlarmDateAndTime(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol3
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol3, newColValue);
+            super.setValue(idxFmAlarmDateAndTime, newColValue);
         }
 
-        public UnsignedInteger32 getSnmp4jDemoSparseTableCol4() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol4
+        public UnsignedInteger32 getFmAlarmSeverity() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol4
             //--AgentGen END
-            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol4);
+            return (UnsignedInteger32) super.getValue(idxFmAlarmSeverity);
         }
 
-        public void setSnmp4jDemoSparseTableCol4(UnsignedInteger32 newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol4
+        public void setFmAlarmSeverity(UnsignedInteger32 newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol4
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol4, newColValue);
+            super.setValue(idxFmAlarmSeverity, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol5() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol5
+        public OctetString getFmAlarmFaultCode() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol5
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol5);
+            return (OctetString) super.getValue(idxFmAlarmFaultCode);
         }
 
-        public void setSnmp4jDemoSparseTableCol5(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol5
+        public void setFmAlarmFaultCode(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol5
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol5, newColValue);
+            super.setValue(idxFmAlarmFaultCode, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol6() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol6
+        public OctetString getFmAlarmMessage() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol6
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol6);
+            return (OctetString) super.getValue(idxFmAlarmMessage);
         }
 
-        public void setSnmp4jDemoSparseTableCol6(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol6
+        public void setFmAlarmMessage(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol6
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol6, newColValue);
+            super.setValue(idxFmAlarmMessage, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol7() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol7
+        public OctetString getFmAlarmComponentName() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol7
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol7);
+            return (OctetString) super.getValue(idxFmAlarmComponentName);
         }
 
-        public void setSnmp4jDemoSparseTableCol7(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol7
+        public void setFmAlarmComponentName(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol7
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol7, newColValue);
+            super.setValue(idxFmAlarmComponentName, newColValue);
         }
 
-        public UnsignedInteger32 getSnmp4jDemoSparseTableCol8() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol8
+        public UnsignedInteger32 getFmAlarmEventType() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol8
             //--AgentGen END
-            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol8);
+            return (UnsignedInteger32) super.getValue(idxFmAlarmEventType);
         }
 
-        public void setSnmp4jDemoSparseTableCol8(UnsignedInteger32 newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol8
+        public void setFmAlarmEventType(UnsignedInteger32 newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol8
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol8, newColValue);
+            super.setValue(idxFmAlarmEventType, newColValue);
         }
 
-        public UnsignedInteger32 getSnmp4jDemoSparseTableCol9() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol9
+        public UnsignedInteger32 getFmAlarmProbableCause() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol9
             //--AgentGen END
-            return (UnsignedInteger32) super.getValue(idxSnmp4jDemoSparseTableCol9);
+            return (UnsignedInteger32) super.getValue(idxFmAlarmProbableCause);
         }
 
-        public void setSnmp4jDemoSparseTableCol9(UnsignedInteger32 newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol9
+        public void setFmAlarmProbableCause(UnsignedInteger32 newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol9
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol9, newColValue);
+            super.setValue(idxFmAlarmProbableCause, newColValue);
         }
 
-        public OctetString getSnmp4jDemoSparseTableCol10() {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::getSnmp4jDemoSparseTableCol10
+        public OctetString getFmAlarmAttributes() {
+            //--AgentGen BEGIN=fmAlarmEntry::getSnmp4jDemoSparseTableCol10
             //--AgentGen END
-            return (OctetString) super.getValue(idxSnmp4jDemoSparseTableCol10);
+            return (OctetString) super.getValue(idxFmAlarmAttributes);
         }
 
-        public void setSnmp4jDemoSparseTableCol10(OctetString newColValue) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::setSnmp4jDemoSparseTableCol10
+        public void setFmAlarmAttributes(OctetString newColValue) {
+            //--AgentGen BEGIN=fmAlarmEntry::setSnmp4jDemoSparseTableCol10
             //--AgentGen END
-            super.setValue(idxSnmp4jDemoSparseTableCol10, newColValue);
+            super.setValue(idxFmAlarmAttributes, newColValue);
         }
 
         public Variable getValue(int column) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowGetValue
+            //--AgentGen BEGIN=fmAlarmEntry::RowGetValue
             //--AgentGen END
             switch(column) {
-                case idxSnmp4jDemoSparseTableCol1:
-                    return getSnmp4jDemoSparseTableCol1();
-                case idxSnmp4jDemoSparseTableCol2:
-                    return getSnmp4jDemoSparseTableCol2();
-                case idxSnmp4jDemoSparseTableCol3:
-                    return getSnmp4jDemoSparseTableCol3();
-                case idxSnmp4jDemoSparseTableCol4:
-                    return getSnmp4jDemoSparseTableCol4();
-                case idxSnmp4jDemoSparseTableCol5:
-                    return getSnmp4jDemoSparseTableCol5();
-                case idxSnmp4jDemoSparseTableCol6:
-                    return getSnmp4jDemoSparseTableCol6();
-                case idxSnmp4jDemoSparseTableCol7:
-                    return getSnmp4jDemoSparseTableCol7();
-                case idxSnmp4jDemoSparseTableCol8:
-                    return getSnmp4jDemoSparseTableCol8();
-                case idxSnmp4jDemoSparseTableCol9:
-                    return getSnmp4jDemoSparseTableCol9();
-                case idxSnmp4jDemoSparseTableCol10:
-                    return getSnmp4jDemoSparseTableCol10();
+                case idxFmAlarmId:
+                    return getFmAlarmId();
+                case idxFmAlarmNodeName:
+                    return getFmAlarmNodeName();
+                case idxFmAlarmDateAndTime:
+                    return getFmAlarmDateAndTime();
+                case idxFmAlarmSeverity:
+                    return getFmAlarmSeverity();
+                case idxFmAlarmFaultCode:
+                    return getFmAlarmFaultCode();
+                case idxFmAlarmMessage:
+                    return getFmAlarmMessage();
+                case idxFmAlarmComponentName:
+                    return getFmAlarmComponentName();
+                case idxFmAlarmEventType:
+                    return getFmAlarmEventType();
+                case idxFmAlarmProbableCause:
+                    return getFmAlarmProbableCause();
+                case idxFmAlarmAttributes:
+                    return getFmAlarmAttributes();
                 default:
                     return super.getValue(column);
             }
         }
 
         public void setValue(int column, Variable value) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowSetValue
+            //--AgentGen BEGIN=fmAlarmEntry::RowSetValue
             //--AgentGen END
             switch(column) {
-                case idxSnmp4jDemoSparseTableCol1:
-                    setSnmp4jDemoSparseTableCol1((UnsignedInteger32)value);
+                case idxFmAlarmId:
+                    setFmAlarmId((UnsignedInteger32)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol2:
-                    setSnmp4jDemoSparseTableCol2((OctetString)value);
+                case idxFmAlarmNodeName:
+                    setFmAlarmNodeName((OctetString)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol3:
-                    setSnmp4jDemoSparseTableCol3((OctetString)value);
+                case idxFmAlarmDateAndTime:
+                    setFmAlarmDateAndTime((OctetString)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol4:
-                    setSnmp4jDemoSparseTableCol4((UnsignedInteger32)value);
+                case idxFmAlarmSeverity:
+                    setFmAlarmSeverity((UnsignedInteger32)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol5:
-                    setSnmp4jDemoSparseTableCol5((OctetString)value);
+                case idxFmAlarmFaultCode:
+                    setFmAlarmFaultCode((OctetString)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol6:
-                    setSnmp4jDemoSparseTableCol6((OctetString)value);
+                case idxFmAlarmMessage:
+                    setFmAlarmMessage((OctetString)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol7:
-                    setSnmp4jDemoSparseTableCol7((OctetString)value);
+                case idxFmAlarmComponentName:
+                    setFmAlarmComponentName((OctetString)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol8:
-                    setSnmp4jDemoSparseTableCol8((UnsignedInteger32)value);
+                case idxFmAlarmEventType:
+                    setFmAlarmEventType((UnsignedInteger32)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol9:
-                    setSnmp4jDemoSparseTableCol9((UnsignedInteger32)value);
+                case idxFmAlarmProbableCause:
+                    setFmAlarmProbableCause((UnsignedInteger32)value);
                     break;
-                case idxSnmp4jDemoSparseTableCol10:
-                    setSnmp4jDemoSparseTableCol10((OctetString)value);
+                case idxFmAlarmAttributes:
+                    setFmAlarmAttributes((OctetString)value);
                     break;
                 default:
                     super.setValue(column, value);
             }
         }
 
-        //--AgentGen BEGIN=snmp4jDemoSparseEntry::Row
+        //--AgentGen BEGIN=fmAlarmEntry::Row
         //--AgentGen END
     }
 
-    class Snmp4jDemoSparseEntryRowFactory
-            implements MOTableRowFactory<Snmp4jDemoSparseEntryRow>
+    class FmAlarmEntryRowFactory
+            implements MOTableRowFactory<FmAlarmEntryRow>
     {
-        public synchronized Snmp4jDemoSparseEntryRow createRow(OID index, Variable[] values)
+        public synchronized FmAlarmEntryRow createRow(OID index, Variable[] values)
                 throws UnsupportedOperationException
         {
-            Snmp4jDemoSparseEntryRow row =
-                    new Snmp4jDemoSparseEntryRow(index, values);
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::createRow
+            FmAlarmEntryRow row =
+                    new FmAlarmEntryRow(index, values);
+            //--AgentGen BEGIN=fmAlarmEntry::createRow
             //--AgentGen END
             return row;
         }
 
-        public synchronized void freeRow(Snmp4jDemoSparseEntryRow row) {
-            //--AgentGen BEGIN=snmp4jDemoSparseEntry::freeRow
+        public synchronized void freeRow(FmAlarmEntryRow row) {
+            //--AgentGen BEGIN=fmAlarmEntry::freeRow
             //--AgentGen END
         }
 
-        //--AgentGen BEGIN=snmp4jDemoSparseEntry::RowFactory
+        //--AgentGen BEGIN=fmAlarmEntry::RowFactory
         //--AgentGen END
     }
 
@@ -1197,23 +1167,23 @@ public class Snmp4jDemoMib
 //--AgentGen BEGIN=_METHODS
 //--AgentGen END
 
-    // Textual Definitions of MIB module Snmp4jDemoMib
+    // Textual Definitions of MIB module FmAlarmMib
     protected void addTCsToFactory(MOFactory moFactory) {
-        moFactory.addTextualConvention(new SparseTableColumn());
+        moFactory.addTextualConvention(new FmAlarmColumn());
     }
 
 
-    public class SparseTableColumn implements TextualConvention<Variable> {
+    public class FmAlarmColumn implements TextualConvention<Variable> {
 
-        public SparseTableColumn() {
+        public FmAlarmColumn() {
         }
 
         public String getModuleName() {
-            return TC_MODULE_SNMP4J_DEMO_MIB;
+            return TC_MODULE_KTR_FM_MIB;
         }
 
         public String getName() {
-            return TC_SPARSETABLECOLUMN;
+            return TC_FMALARMCOLUMN;
         }
 
         public Variable createInitialValue() {
@@ -1222,7 +1192,7 @@ public class Snmp4jDemoMib
                 ((AssignableFromLong)v).setValue(0L);
             }
             // further modify value to comply with TC constraints here:
-            //--AgentGen BEGIN=SparseTableColumn::createInitialValue
+            //--AgentGen BEGIN=FmAlarmColumn::createInitialValue
             //--AgentGen END
             return v;
         }
@@ -1232,7 +1202,7 @@ public class Snmp4jDemoMib
             ConstraintsImpl vc = new ConstraintsImpl();
             vc.add(new Constraint(0L, 10L));
             scalar.addMOValueValidationListener(new ValueConstraintValidator(vc));
-            //--AgentGen BEGIN=SparseTableColumn::createScalar
+            //--AgentGen BEGIN=FmAlarmColumn::createScalar
             //--AgentGen END
             return scalar;
         }
@@ -1246,7 +1216,7 @@ public class Snmp4jDemoMib
                 vc.add(new Constraint(0L, 10L));
                 mcol.addMOValueValidationListener(new ValueConstraintValidator(vc));
             }
-            //--AgentGen BEGIN=SparseTableColumn::createColumn
+            //--AgentGen BEGIN=FmAlarmColumn::createColumn
             //--AgentGen END
             return col;
         }

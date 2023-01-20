@@ -216,7 +216,7 @@ public class SampleAgent {
         };
         agent.setContext(new SecurityModels(),
                 new SecurityProtocols(SecurityProtocols.SecurityProtocolSet.maxCompatibility), new CounterSupport());
-     }
+    }
 
     protected static Properties getTableSizeLimitsProperties(Map<String, List<Object>> args) {
         InputStream tableSizeLimitsInputStream =
@@ -301,8 +301,8 @@ public class SampleAgent {
     protected void registerMIBs() {
         if (modules == null) {
             modules = new Modules(getFactory());
-            modules.getSnmp4jDemoMib().getSnmp4jDemoSparseEntry().addMOTableRowListener(
-                    new SparseTableRowListener()
+            modules.getFmAlarmMib().getFmAlarmEntry().addMOTableRowListener(
+                    new FmAlarmRowListener()
             );
         }
         try {
@@ -335,78 +335,78 @@ public class SampleAgent {
         }
     }
 
-    class SparseTableRowListener implements MOTableRowListener<Snmp4jDemoMib.Snmp4jDemoSparseEntryRow> {
-        public void rowChanged(MOTableRowEvent<Snmp4jDemoMib.Snmp4jDemoSparseEntryRow> event) {
+    class FmAlarmRowListener implements MOTableRowListener<FmAlarmMib.FmAlarmEntryRow> {
+        public void rowChanged(MOTableRowEvent<FmAlarmMib.FmAlarmEntryRow> event) {
             if ((event.getType() == MOTableRowEvent.CREATE) || (event.getType() == MOTableRowEvent.UPDATED)) {
                 // ignore
                 return;
             }
 
-            UnsignedInteger32 col1 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol1);
-            OctetString col2 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol2);
-            OctetString col3 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol3);
-            UnsignedInteger32 col4 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol4);
-            OctetString col5 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol5);
-            OctetString col6 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol6);
-            OctetString col7 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol7);
-            UnsignedInteger32 col8 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol8);
-            UnsignedInteger32 col9 = (UnsignedInteger32) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol9);
-            OctetString col10 = (OctetString) event.getRow().getValue(Snmp4jDemoMib.idxSnmp4jDemoSparseTableCol10);
+            UnsignedInteger32 fmAlarmIdValue = (UnsignedInteger32) event.getRow().getValue(FmAlarmMib.idxFmAlarmId);
+            OctetString fmAlarmNodeNameValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmNodeName);
+            OctetString fmAlarmDateAndTimeValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmDateAndTime);
+            UnsignedInteger32 fmAlarmSeverityValue = (UnsignedInteger32) event.getRow().getValue(FmAlarmMib.idxFmAlarmSeverity);
+            OctetString fmAlarmFaultCodeValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmFaultCode);
+            OctetString fmAlarmMessageValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmMessage);
+            OctetString fmAlarmComponentNameValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmComponentName);
+            UnsignedInteger32 fmAlarmEventTypeValue = (UnsignedInteger32) event.getRow().getValue(FmAlarmMib.idxFmAlarmEventType);
+            UnsignedInteger32 fmAlarmProbableCauseValue = (UnsignedInteger32) event.getRow().getValue(FmAlarmMib.idxFmAlarmProbableCause);
+            OctetString fmAlarmAttributesValue = (OctetString) event.getRow().getValue(FmAlarmMib.idxFmAlarmAttributes);
 
             VariableBinding[] payload = new VariableBinding[10];
             OID table = event.getTable().getOID();
 
-            OID colSnmp4jDemoSparseTableCol1Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol1Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol1);
-            colSnmp4jDemoSparseTableCol1Variable.append(event.getRow().getIndex());
+            OID colFmAlarmIdVariable = new OID(table);
+            colFmAlarmIdVariable.append(FmAlarmMib.colFmAlarmId);
+            colFmAlarmIdVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol2Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol2Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol2);
-            colSnmp4jDemoSparseTableCol2Variable.append(event.getRow().getIndex());
+            OID colFmAlarmNodeNameVariable = new OID(table);
+            colFmAlarmNodeNameVariable.append(FmAlarmMib.colFmAlarmNodeName);
+            colFmAlarmNodeNameVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol3Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol3Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol3);
-            colSnmp4jDemoSparseTableCol3Variable.append(event.getRow().getIndex());
+            OID colFmAlarmDateAndTimeVariable = new OID(table);
+            colFmAlarmDateAndTimeVariable.append(FmAlarmMib.colFmAlarmDateAndTime);
+            colFmAlarmDateAndTimeVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol4Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol4Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol4);
-            colSnmp4jDemoSparseTableCol4Variable.append(event.getRow().getIndex());
+            OID colFmAlarmSeverityVariable = new OID(table);
+            colFmAlarmSeverityVariable.append(FmAlarmMib.colFmAlarmSeverity);
+            colFmAlarmSeverityVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol5Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol5Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol5);
-            colSnmp4jDemoSparseTableCol5Variable.append(event.getRow().getIndex());
+            OID colFmAlarmFaultCodeVariable = new OID(table);
+            colFmAlarmFaultCodeVariable.append(FmAlarmMib.colFmAlarmFaultCode);
+            colFmAlarmFaultCodeVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol6Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol6Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol6);
-            colSnmp4jDemoSparseTableCol6Variable.append(event.getRow().getIndex());
+            OID colFmAlarmMessageVariable = new OID(table);
+            colFmAlarmMessageVariable.append(FmAlarmMib.colFmAlarmMessage);
+            colFmAlarmMessageVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol7Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol7Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol7);
-            colSnmp4jDemoSparseTableCol7Variable.append(event.getRow().getIndex());
+            OID colFmAlarmComponentNameVariable = new OID(table);
+            colFmAlarmComponentNameVariable.append(FmAlarmMib.colFmAlarmComponentName);
+            colFmAlarmComponentNameVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol8Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol8Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol8);
-            colSnmp4jDemoSparseTableCol8Variable.append(event.getRow().getIndex());
+            OID colFmAlarmEventTypeVariable = new OID(table);
+            colFmAlarmEventTypeVariable.append(FmAlarmMib.colFmAlarmEventType);
+            colFmAlarmEventTypeVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol9Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol9Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol9);
-            colSnmp4jDemoSparseTableCol9Variable.append(event.getRow().getIndex());
+            OID colFmAlarmProbableCauseVariable = new OID(table);
+            colFmAlarmProbableCauseVariable.append(FmAlarmMib.colFmAlarmProbableCause);
+            colFmAlarmProbableCauseVariable.append(event.getRow().getIndex());
 
-            OID colSnmp4jDemoSparseTableCol10Variable = new OID(table);
-            colSnmp4jDemoSparseTableCol10Variable.append(Snmp4jDemoMib.colSnmp4jDemoSparseTableCol10);
-            colSnmp4jDemoSparseTableCol10Variable.append(event.getRow().getIndex());
+            OID colFmAlarmAttributesVariable = new OID(table);
+            colFmAlarmAttributesVariable.append(FmAlarmMib.colFmAlarmAttributes);
+            colFmAlarmAttributesVariable.append(event.getRow().getIndex());
 
-            payload[0] = new VariableBinding(colSnmp4jDemoSparseTableCol1Variable, col1);
-            payload[1] = new VariableBinding(colSnmp4jDemoSparseTableCol2Variable, col2);
-            payload[2] = new VariableBinding(colSnmp4jDemoSparseTableCol3Variable, col3);
-            payload[3] = new VariableBinding(colSnmp4jDemoSparseTableCol4Variable, col4);
-            payload[4] = new VariableBinding(colSnmp4jDemoSparseTableCol5Variable, col5);
-            payload[5] = new VariableBinding(colSnmp4jDemoSparseTableCol6Variable, col6);
-            payload[6] = new VariableBinding(colSnmp4jDemoSparseTableCol7Variable, col7);
-            payload[7] = new VariableBinding(colSnmp4jDemoSparseTableCol8Variable, col8);
-            payload[8] = new VariableBinding(colSnmp4jDemoSparseTableCol9Variable, col9);
-            payload[9] = new VariableBinding(colSnmp4jDemoSparseTableCol10Variable, col10);
-            modules.getSnmp4jDemoMib().snmp4jDemoEvent(
+            payload[0] = new VariableBinding(colFmAlarmIdVariable, fmAlarmIdValue);
+            payload[1] = new VariableBinding(colFmAlarmNodeNameVariable, fmAlarmNodeNameValue);
+            payload[2] = new VariableBinding(colFmAlarmDateAndTimeVariable, fmAlarmDateAndTimeValue);
+            payload[3] = new VariableBinding(colFmAlarmSeverityVariable, fmAlarmSeverityValue);
+            payload[4] = new VariableBinding(colFmAlarmFaultCodeVariable, fmAlarmFaultCodeValue);
+            payload[5] = new VariableBinding(colFmAlarmMessageVariable, fmAlarmMessageValue);
+            payload[6] = new VariableBinding(colFmAlarmComponentNameVariable, fmAlarmComponentNameValue);
+            payload[7] = new VariableBinding(colFmAlarmEventTypeVariable, fmAlarmEventTypeValue);
+            payload[8] = new VariableBinding(colFmAlarmProbableCauseVariable, fmAlarmProbableCauseValue);
+            payload[9] = new VariableBinding(colFmAlarmAttributesVariable, fmAlarmAttributesValue);
+            modules.getFmAlarmMib().fmAlarmNotification(
                     agent.getNotificationOriginator(), new OctetString(), payload);
         }
     }
