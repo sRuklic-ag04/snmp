@@ -3,7 +3,7 @@
  * All Rights Reserved.
  */
 
-package com.kontron.snmp.example;
+package com.kontron.snmp.example.enums;
 
 import org.snmp4j.agent.MOAccess;
 import org.snmp4j.agent.mo.MOColumn;

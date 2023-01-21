@@ -1,4 +1,4 @@
-package com.kontron.snmp.example;
+package com.kontron.snmp.example.enums;
 
 public class FmSeverity {
 

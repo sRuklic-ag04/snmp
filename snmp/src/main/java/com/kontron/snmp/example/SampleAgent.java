@@ -1,23 +1,3 @@
-/*_############################################################################
-  _## 
-  _##  SNMP4J-Agent 3 - SampleAgent.java  
-  _## 
-  _##  Copyright (C) 2005-2021  Frank Fock (SNMP4J.org)
-  _##  
-  _##  Licensed under the Apache License, Version 2.0 (the "License");
-  _##  you may not use this file except in compliance with the License.
-  _##  You may obtain a copy of the License at
-  _##  
-  _##      http://www.apache.org/licenses/LICENSE-2.0
-  _##  
-  _##  Unless required by applicable law or agreed to in writing, software
-  _##  distributed under the License is distributed on an "AS IS" BASIS,
-  _##  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  _##  See the License for the specific language governing permissions and
-  _##  limitations under the License.
-  _##  
-  _##########################################################################*/
-
 package com.kontron.snmp.example;
 
 import java.io.*;
@@ -25,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.text.*;
 import java.util.*;
 
+import com.kontron.snmp.example.agent.FmAlarmEntryRow;
+import com.kontron.snmp.example.agent.FmAlarmMib;
 import org.snmp4j.*;
 import org.snmp4j.agent.*;
 import org.snmp4j.agent.io.*;
@@ -56,8 +38,6 @@ import javax.crypto.Cipher;
  * <p>
  * The agent uses the {@link ConsoleLogFactory} to log messages.
  *
- * @author Frank Fock
- * @version 3.2.1
  */
 public class SampleAgent {
 
@@ -126,9 +106,9 @@ public class SampleAgent {
 
     protected MOInputFactory createMOInputFactory(String configFilename, ImportMode importMode) {
         MOInputFactory configurationFactory;
-        InputStream configInputStream =
-                SampleAgent.class.getResourceAsStream("SampleAgentConfig.properties");
+        InputStream configInputStream = SampleAgent.class.getResourceAsStream("SampleAgentConfig.properties");
         final Properties props = new Properties();
+
         if (configFilename != null) {
             try {
                 configInputStream = new FileInputStream(ResourceUtils.getFile("classpath:SampleAgentConfig.properties"));
@@ -137,11 +117,13 @@ public class SampleAgent {
                 throw new RuntimeException(ex1);
             }
         }
+
         try {
             props.load(configInputStream);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         configurationFactory = () -> new PropertyMOInput(props, this.agent, importMode);
         return configurationFactory;
     }
@@ -154,10 +136,12 @@ public class SampleAgent {
         if (tlsVersions != null && (tlsVersions.size() > 0)) {
             System.setProperty(SnmpConfigurator.P_TLS_VERSION, (String) tlsVersions.get(0));
         }
+
         String configFilename = null;
         if (args.containsKey("cfg")) {
             configFilename = (String) ArgumentParser.getValue(args, "cfg", 0);
         }
+
         configFile = (String) (args.get("c")).get(0);
         this.tableSizeLimits = tableSizeLimits;
         String dhKickstartInfoPath = (String) ArgumentParser.getFirstValue(args.get("dhks"));
@@ -214,22 +198,22 @@ public class SampleAgent {
                 return session;
             }
         };
-        agent.setContext(new SecurityModels(),
-                new SecurityProtocols(SecurityProtocols.SecurityProtocolSet.maxCompatibility), new CounterSupport());
+        agent.setContext(new SecurityModels(), new SecurityProtocols(SecurityProtocols.SecurityProtocolSet.maxCompatibility), new CounterSupport());
     }
 
     protected static Properties getTableSizeLimitsProperties(Map<String, List<Object>> args) {
-        InputStream tableSizeLimitsInputStream =
-                SampleAgent.class.getResourceAsStream("SampleAgentTableSizeLimits.properties");
+        InputStream tableSizeLimitsInputStream = SampleAgent.class.getResourceAsStream("SampleAgentTableSizeLimits.properties");
+
         if (args.containsKey("ts")) {
             try {
-                tableSizeLimitsInputStream =
-                        new FileInputStream(ResourceUtils.getFile("classpath:SampleAgentTableSizeLimits.properties"));
+                tableSizeLimitsInputStream = new FileInputStream(ResourceUtils.getFile("classpath:SampleAgentTableSizeLimits.properties"));
             } catch (FileNotFoundException ex1) {
                 ex1.printStackTrace();
             }
         }
+
         Properties tableSizeLimits = new Properties();
+
         try {
             tableSizeLimits.load(tableSizeLimitsInputStream);
         } catch (IOException ex) {
@@ -241,17 +225,17 @@ public class SampleAgent {
     protected void addListenAddresses(MessageDispatcher md, List<Object> addresses) {
         for (Object addressString : addresses) {
             Address address = GenericAddress.parse(addressString.toString());
+
             if (address == null) {
                 logger.fatal("Could not parse address string '" + addressString + "'");
                 return;
             }
-            TransportMapping<? extends Address> tm =
-                    TransportMappings.getInstance().createTransportMapping(address);
+
+            TransportMapping<? extends Address> tm = TransportMappings.getInstance().createTransportMapping(address);
             if (tm != null) {
                 md.addTransportMapping(tm);
             } else {
-                logger.warn("No transport mapping available for address '" +
-                        address + "'.");
+                logger.warn("No transport mapping available for address '" + address + "'.");
             }
         }
     }
@@ -301,42 +285,18 @@ public class SampleAgent {
     protected void registerMIBs() {
         if (modules == null) {
             modules = new Modules(getFactory());
-            modules.getFmAlarmMib().getFmAlarmEntry().addMOTableRowListener(
-                    new FmAlarmRowListener()
-            );
+            modules.getFmAlarmMib().getFmAlarmEntry().addMOTableRowListener(new FmAlarmRowListener());
         }
+
         try {
             modules.registerMOs(server, null);
-      /* Some alternatives
-      // Register a scalar with your OID in your enterprise subtree:
-      MOScalar myScalar = new MOScalar(new OID("<scalarOID.0>"),
-                                       MOAccessImpl.ACCESS_READ_CREATE,
-                                       new OctetString("myText"));
-      server.register(myScalar, null);
-      // Register a table with a string index and a single integer payload column
-      // a row status column to
-      DefaultMOTable myTable =
-         new DefaultMOTable(new OID("<tableEntryOID>"),
-                            new MOTableIndex(new MOTableSubIndex[] {
-                                             new MOTableSubIndex(new OID("<indexObjectClassOID>"),
-                                             SMIConstants.SYNTAX_OCTET_STRING, 1, 16) },
-                                             true),
-         new MOMutableColumn[] {
-      new MOMutableColumn(1, SMIConstants.SYNTAX_INTEGER32,
-                          MOAccessImpl.ACCESS_READ_CREATE,
-                          new Integer32(10), true),
-      new RowStatus(2)
-         });
-      server.register(myTable, null);
-      */
         } catch (DuplicateRegistrationException drex) {
-            logger.error("Duplicate registration: " + drex.getMessage() + "." +
-                    " MIB object registration may be incomplete!", drex);
+            logger.error("Duplicate registration: " + drex.getMessage() + "." + " MIB object registration may be incomplete!", drex);
         }
     }
 
-    class FmAlarmRowListener implements MOTableRowListener<FmAlarmMib.FmAlarmEntryRow> {
-        public void rowChanged(MOTableRowEvent<FmAlarmMib.FmAlarmEntryRow> event) {
+    class FmAlarmRowListener implements MOTableRowListener<FmAlarmEntryRow> {
+        public void rowChanged(MOTableRowEvent<FmAlarmEntryRow> event) {
             if ((event.getType() == MOTableRowEvent.CREATE) || (event.getType() == MOTableRowEvent.UPDATED)) {
                 // ignore
                 return;
@@ -469,6 +429,4 @@ public class SampleAgent {
             }
         }
     }
-
-
 }
