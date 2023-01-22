@@ -12,7 +12,7 @@ public interface FmAlarmTableService {
 
     FmAlarmTableRow addRow(FmAlarmTableRow fmAlarmTableRow);
 
-    FmAlarmTableRow updateRow(FmAlarmTableRow fmAlarmTableRow);
+    FmAlarmTableRow updateRow(Integer id, FmAlarmTableRow fmAlarmTableRow);
 
     void deleteRow(Integer id);
 

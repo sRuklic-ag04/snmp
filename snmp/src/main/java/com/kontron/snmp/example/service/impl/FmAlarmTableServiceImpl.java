@@ -40,7 +40,7 @@ public class FmAlarmTableServiceImpl implements FmAlarmTableService {
     @Override
     public FmAlarmTableRow addRow(FmAlarmTableRow fmAlarmTableRow) {
         try {
-            FmAlarmMib.addRow(new OID( new int[] {fmAlarmTableRow.getFmAlarmId()}), fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
+            FmAlarmMib.addRow(fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,9 +49,9 @@ public class FmAlarmTableServiceImpl implements FmAlarmTableService {
     }
 
     @Override
-    public FmAlarmTableRow updateRow(FmAlarmTableRow fmAlarmTableRow) {
+    public FmAlarmTableRow updateRow(Integer id, FmAlarmTableRow fmAlarmTableRow) {
         try {
-            FmAlarmMib.updateRow(new OID(new int[] {fmAlarmTableRow.getFmAlarmId()}), fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
+            FmAlarmMib.updateRow(new OID(new int[] {id}), fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
         } catch (Exception e) {
             e.printStackTrace();
         }

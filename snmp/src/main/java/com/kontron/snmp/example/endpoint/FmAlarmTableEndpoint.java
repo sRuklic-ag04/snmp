@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/snmp")
 public class FmAlarmTableEndpoint {
@@ -15,36 +16,59 @@ public class FmAlarmTableEndpoint {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getRow(@PathVariable("id") Integer id) {
-        return new ResponseEntity<>(fmAlarmTableService.getRow(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(fmAlarmTableService.getRow(id), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @GetMapping(value = "/")
     public ResponseEntity<?> getRows() {
-        return new ResponseEntity<>(fmAlarmTableService.getRows(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(fmAlarmTableService.getRows(), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<?> addRow(@RequestBody FmAlarmTableRow fmAlarmTableRow) {
-        fmAlarmTableService.addRow(fmAlarmTableRow);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            fmAlarmTableService.addRow(fmAlarmTableRow);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
-    @PutMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public ResponseEntity<?> updateRow(@PathVariable("id") Integer id, @RequestBody FmAlarmTableRow fmAlarmTableRow) {
-        fmAlarmTableService.updateRow(fmAlarmTableRow);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            fmAlarmTableService.updateRow(id, fmAlarmTableRow);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteRow(@PathVariable("id") Integer id) {
-        fmAlarmTableService.deleteRow(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            fmAlarmTableService.deleteRow(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @DeleteMapping(value = "/")
     public ResponseEntity<?> deleteAllRows() {
-        fmAlarmTableService.deleteAll();
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            fmAlarmTableService.deleteAll();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
-
 }

@@ -641,8 +641,8 @@ public class FmAlarmMib implements MOGroup {
         return fmAlarmEntryRows;
     }
 
-    public static void addRow(OID oid, Variable[] values) {
-        FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(oid, values);
+    public static void addRow(Variable[] values) {
+        FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(fmAlarmEntryModel.lastIndex().nextPeer() , values);
 
         fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
@@ -650,7 +650,7 @@ public class FmAlarmMib implements MOGroup {
     public static void updateRow(OID oid, Variable[] values) {
         FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(oid, values);
 
-        fmAlarmEntryModel.removeRow(oid); // TODO
+        fmAlarmEntryModel.removeRow(oid);
         fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
 
