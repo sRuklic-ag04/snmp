@@ -18,6 +18,11 @@ public class FmAlarmTableEndpoint {
         return new ResponseEntity<>(fmAlarmTableService.getRow(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/")
+    public ResponseEntity<?> getRows() {
+        return new ResponseEntity<>(fmAlarmTableService.getRows(), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/")
     public ResponseEntity<?> addRow(@RequestBody FmAlarmTableRow fmAlarmTableRow) {
         fmAlarmTableService.addRow(fmAlarmTableRow);

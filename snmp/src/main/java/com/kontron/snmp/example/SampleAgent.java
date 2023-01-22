@@ -24,6 +24,8 @@ import org.snmp4j.smi.*;
 import org.snmp4j.transport.*;
 import org.snmp4j.util.*;
 import org.snmp4j.security.SecurityProtocols;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.util.ResourceUtils;
 
 import javax.crypto.Cipher;
@@ -401,9 +403,9 @@ public class SampleAgent {
      *         ..}. For the format description see {@link ArgumentParser}. Multiple agent configurations can be given
      *         separated by ||.
      */
-    public static void main(String[] args) {
-        ArgumentParser parser =
-                new ArgumentParser(COMMAND_LINE_OPTIONS, COMMAND_LINE_PARAMS);
+    public static void runAgent(String[] args) {
+
+        ArgumentParser parser = new ArgumentParser(COMMAND_LINE_OPTIONS, COMMAND_LINE_PARAMS);
         List<String[]> multiAgentArgs = splitArgsForMultipleAgents(args, "||");
         for (String[] agentArgs : multiAgentArgs) {
             Map<String, List<Object>> commandLineParameters;

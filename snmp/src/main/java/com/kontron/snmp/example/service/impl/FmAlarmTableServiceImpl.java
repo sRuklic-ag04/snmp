@@ -8,6 +8,9 @@ import org.snmp4j.smi.OID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FmAlarmTableServiceImpl implements FmAlarmTableService {
 
@@ -18,6 +21,16 @@ public class FmAlarmTableServiceImpl implements FmAlarmTableService {
     public FmAlarmTableRow getRow(Integer id) {
         try {
             return fmAlarmTableRowMapper.toFmAlarmTableRow(FmAlarmMib.getRow(new OID(new int[] { id })));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<FmAlarmTableRow> getRows() {
+        try {
+            return FmAlarmMib.getRows().stream().map(( row ) -> fmAlarmTableRowMapper.toFmAlarmTableRow(row)).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }

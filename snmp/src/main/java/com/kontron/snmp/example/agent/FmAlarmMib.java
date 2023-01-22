@@ -11,6 +11,9 @@ import org.snmp4j.agent.mo.snmp.smi.*;
 import org.snmp4j.log.LogFactory;
 import org.snmp4j.log.LogAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FmAlarmMib implements MOGroup {
 
     private static final LogAdapter LOGGER = LogFactory.getLogger(FmAlarmMib.class);
@@ -629,6 +632,13 @@ public class FmAlarmMib implements MOGroup {
     public static FmAlarmEntryRow getRow(OID oid) {
 
         return fmAlarmEntryModel.getRow(oid);
+    }
+
+    public static List<FmAlarmEntryRow> getRows() {
+        List<FmAlarmEntryRow> fmAlarmEntryRows = new ArrayList<>();
+        fmAlarmEntryModel.iterator().forEachRemaining(fmAlarmEntryRows::add);
+
+        return fmAlarmEntryRows;
     }
 
     public static void addRow(OID oid, Variable[] values) {
