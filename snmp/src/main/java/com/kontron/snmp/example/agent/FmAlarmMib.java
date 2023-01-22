@@ -73,7 +73,7 @@ public class FmAlarmMib implements MOGroup {
     private MOTable<FmAlarmEntryRow,
             MOColumn,
             MOMutableTableModel<FmAlarmEntryRow>> fmAlarmEntry;
-    private MOMutableTableModel<FmAlarmEntryRow> fmAlarmEntryModel;
+    private static MOMutableTableModel<FmAlarmEntryRow> fmAlarmEntryModel;
 
 
     /**
@@ -608,7 +608,7 @@ public class FmAlarmMib implements MOGroup {
             } else if (i == 8) {
                 values[i] = new UnsignedInteger32(IANAItuProbableCause.aIS);
             } else {
-                values[i] = new OctetString(String.valueOf(i) + "bbbbbb");
+                values[i] = new OctetString(String.valueOf(i) + "aaaaaa");
             }
         }
 
@@ -626,9 +626,21 @@ public class FmAlarmMib implements MOGroup {
         removeRow(1);
     }
 
-    public void addRow(OID oid, Variable[] values) {
+    public static FmAlarmEntryRow getRow(OID oid) {
+
+        return fmAlarmEntryModel.getRow(oid);
+    }
+
+    public static void addRow(OID oid, Variable[] values) {
         FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(oid, values);
 
+        fmAlarmEntryModel.addRow(fmAlarmEntryRow);
+    }
+
+    public static void updateRow(OID oid, Variable[] values) {
+        FmAlarmEntryRow fmAlarmEntryRow = new FmAlarmEntryRow(oid, values);
+
+        fmAlarmEntryModel.removeRow(oid); // TODO
         fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
 
@@ -638,15 +650,15 @@ public class FmAlarmMib implements MOGroup {
         fmAlarmEntryModel.addRow(fmAlarmEntryRow);
     }
 
-    public void removeRow(OID oid) {
+    public static void removeRow(OID oid) {
         fmAlarmEntryModel.removeRow(oid);
     }
 
-    public void removeRow(int oid) {
+    public static void removeRow(int oid) {
         fmAlarmEntryModel.removeRow(new OID(new int[]{oid}));
     }
 
-    public void clearTable() {
+    public static void clearTable() {
         fmAlarmEntryModel.clear();
     }
 
