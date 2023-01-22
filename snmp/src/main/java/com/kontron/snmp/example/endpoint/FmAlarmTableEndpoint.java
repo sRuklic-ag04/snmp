@@ -35,8 +35,8 @@ public class FmAlarmTableEndpoint {
     @PostMapping(value = "/")
     public ResponseEntity<?> addRow(@RequestBody FmAlarmTableRow fmAlarmTableRow) {
         try {
-            fmAlarmTableService.addRow(fmAlarmTableRow);
-            return new ResponseEntity<>(HttpStatus.OK);
+            FmAlarmTableRow fmAlarmTableRow1 = fmAlarmTableService.addRow(fmAlarmTableRow);
+            return new ResponseEntity<>(fmAlarmTableRow1, HttpStatus.OK);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
@@ -45,8 +45,8 @@ public class FmAlarmTableEndpoint {
     @PostMapping(value = "/{id}")
     public ResponseEntity<?> updateRow(@PathVariable("id") Integer id, @RequestBody FmAlarmTableRow fmAlarmTableRow) {
         try {
-            fmAlarmTableService.updateRow(id, fmAlarmTableRow);
-            return new ResponseEntity<>(HttpStatus.OK);
+            FmAlarmTableRow fmAlarmTableRow1 = fmAlarmTableService.updateRow(id, fmAlarmTableRow);
+            return new ResponseEntity<>(fmAlarmTableRow1, HttpStatus.OK);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }

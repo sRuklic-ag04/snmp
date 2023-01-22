@@ -19,60 +19,31 @@ public class FmAlarmTableServiceImpl implements FmAlarmTableService {
 
     @Override
     public FmAlarmTableRow getRow(Integer id) {
-        try {
-            return fmAlarmTableRowMapper.toFmAlarmTableRow(FmAlarmMib.getRow(new OID(new int[] { id })));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return fmAlarmTableRowMapper.toFmAlarmTableRow(FmAlarmMib.getRow(new OID(new int[] { id })));
     }
 
     @Override
     public List<FmAlarmTableRow> getRows() {
-        try {
-            return FmAlarmMib.getRows().stream().map(( row ) -> fmAlarmTableRowMapper.toFmAlarmTableRow(row)).collect(Collectors.toList());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return FmAlarmMib.getRows().stream().map(( row ) -> fmAlarmTableRowMapper.toFmAlarmTableRow(row)).collect(Collectors.toList());
     }
 
     @Override
     public FmAlarmTableRow addRow(FmAlarmTableRow fmAlarmTableRow) {
-        try {
-            FmAlarmMib.addRow(fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return fmAlarmTableRowMapper.toFmAlarmTableRow(FmAlarmMib.addRow(fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow)));
     }
 
     @Override
     public FmAlarmTableRow updateRow(Integer id, FmAlarmTableRow fmAlarmTableRow) {
-        try {
-            FmAlarmMib.updateRow(new OID(new int[] {id}), fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return fmAlarmTableRowMapper.toFmAlarmTableRow(FmAlarmMib.updateRow(new OID(new int[] {id}), fmAlarmTableRowMapper.toVariableArray(fmAlarmTableRow)));
     }
 
     @Override
     public void deleteRow(Integer id) {
-        try {
-            FmAlarmMib.removeRow(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FmAlarmMib.removeRow(id);
     }
 
     @Override
     public void deleteAll() {
-        try {
-            FmAlarmMib.clearTable();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FmAlarmMib.clearTable();
     }
 }
